@@ -1,19 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Heebo, Frank_Ruhl_Libre } from "next/font/google";
+import { Assistant, Rubik } from "next/font/google";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 import PWARegister from "@/components/PWARegister";
 
-const heebo = Heebo({
+// גופן הגוף — אסיסטנט: עברי, נקי ומאוד קריא בנייד.
+const assistant = Assistant({
   subsets: ["hebrew", "latin"],
-  variable: "--font-heebo",
+  variable: "--font-assistant",
   weight: ["400", "500", "600", "700"],
 });
 
-const frank = Frank_Ruhl_Libre({
+// גופן הכותרות/כפתורים — Rubik: מודרני, גיאומטרי וטק, עם תמיכה מלאה בעברית.
+const rubik = Rubik({
   subsets: ["hebrew", "latin"],
-  variable: "--font-frank",
-  weight: ["500", "700", "900"],
+  variable: "--font-rubik",
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -48,7 +50,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="he" dir="rtl" className={`${heebo.variable} ${frank.variable}`}>
+    <html lang="he" dir="rtl" className={`${assistant.variable} ${rubik.variable}`}>
       <body>
         <div className="mx-auto min-h-dvh max-w-lg pb-24">{children}</div>
         <BottomNav />

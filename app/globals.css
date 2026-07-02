@@ -1,50 +1,81 @@
 @import "tailwindcss";
 
 /*
-  מערכת העיצוב: "סיליקון ונחושת"
+  מערכת העיצוב: "סיליקון ונחושת" — גרסה נקייה ומודרנית
   רקע לבן-מעבדה, דיו כחול-כהה כמו הדפסה על שבב, ונחושת — צבע המוליכים על הלוח.
+  הטיפוגרפיה: Rubik לכותרות (מודרני, טק), Assistant לגוף (קריא מאוד בנייד).
 */
 @theme {
-  --color-bg: #f3f5f8; /* לבן-מעבדה קריר */
+  --color-bg: #f4f6f9; /* לבן-מעבדה קריר */
   --color-surface: #ffffff;
+  --color-surface-sunken: #eef1f5; /* משטח שקוע עדין לתוך-כרטיס */
   --color-ink: #13223a; /* כחול-דיו כהה */
-  --color-ink-soft: #5b6b82;
+  --color-ink-soft: #566579;
   --color-ink-faint: #8b98ab;
-  --color-line: #e2e7ee;
+  --color-line: #e4e8ee;
+  --color-line-soft: #eef1f5;
   --color-copper: #b3541e; /* נחושת — צבע המוליכים */
-  --color-copper-deep: #93430f;
-  --color-copper-tint: #faeadd;
+  --color-copper-deep: #8f3f11;
+  --color-copper-tint: #fbeadd;
   --color-navy: #16263f; /* גוף השבב */
   --color-navy-deep: #0d1830;
   --color-good: #1e7f5c;
-  --color-good-tint: #e4f2eb;
+  --color-good-tint: #e6f3ec;
   --color-bad: #b23a3f;
   --color-bad-tint: #f9e8e8;
 
-  --font-body: var(--font-heebo), system-ui, sans-serif;
-  --font-display: var(--font-frank), serif;
+  /* Assistant = גוף. Rubik = כותרות, כפתורים, מספרים מודגשים. */
+  --font-body: var(--font-assistant), system-ui, sans-serif;
+  --font-display: var(--font-rubik), var(--font-assistant), sans-serif;
 
-  --shadow-card: 0 1px 2px rgb(19 34 58 / 0.04), 0 4px 16px rgb(19 34 58 / 0.06);
-  --shadow-chip: 0 2px 4px rgb(13 24 48 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  /* צללים רכים ומדורגים — עומק בלי כובד */
+  --shadow-card: 0 1px 2px rgb(19 34 58 / 0.04), 0 2px 8px rgb(19 34 58 / 0.05);
+  --shadow-card-lg: 0 2px 4px rgb(19 34 58 / 0.05), 0 12px 32px rgb(19 34 58 / 0.09);
+  --shadow-chip: 0 2px 6px rgb(13 24 48 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.1);
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.006em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* כותרות — Rubik, הידוק אותיות עדין למראה טק חד */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/*
+  היררכיה טיפוגרפית לשימוש חוזר:
+  eyebrow (תווית קטנה) → כותרת → כתובית → פסקה.
+*/
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-copper-deep);
+  text-transform: none;
 }
 
 /* קו-מתאר של מקלדת — נגישות */
 :focus-visible {
   outline: 2px solid var(--color-copper);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -60,7 +91,7 @@ body {
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -69,5 +100,5 @@ body {
 }
 
 .rise-in {
-  animation: rise-in 0.35s ease-out both;
+  animation: rise-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

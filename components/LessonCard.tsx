@@ -59,6 +59,26 @@ function BlockView({ block }: { block: Block }) {
         </div>
       );
 
+    case "mistakes":
+      return (
+        <div className="rounded-xl border border-bad/20 bg-bad-tint/60 p-4">
+          <div className="mb-2 flex items-center gap-1.5 text-[13px] font-bold text-bad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4" aria-hidden="true">
+              <path d="M12 8.5v4M12 16h.01M10.3 3.9 2.5 17.5a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" />
+            </svg>
+            טעויות נפוצות בהבנה
+          </div>
+          <ul className="space-y-2">
+            {block.items.map((item, i) => (
+              <li key={i} className="flex gap-2 text-[14.5px] leading-relaxed text-ink">
+                <span className="font-bold text-bad" aria-hidden="true">✗</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+
     case "tip":
       return (
         <div className="rounded-xl border-s-4 border-copper bg-surface p-4 shadow-(--shadow-card)">
@@ -103,10 +123,8 @@ function BlockView({ block }: { block: Block }) {
 export default function LessonCard({ section }: { section: LessonSection }) {
   return (
     <article className="rise-in rounded-2xl border border-line bg-surface p-5 shadow-(--shadow-card)">
-      <div className="text-[12px] font-bold tracking-wide text-copper-deep">
-        {section.eyebrow}
-      </div>
-      <h2 className="mt-1 font-display text-[22px] font-bold leading-snug">
+      <div className="eyebrow">{section.eyebrow}</div>
+      <h2 className="mt-1.5 text-[22px] font-bold leading-snug">
         {section.title}
       </h2>
       <div className="mt-4 space-y-4">

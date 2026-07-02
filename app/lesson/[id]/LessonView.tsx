@@ -3,20 +3,27 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import LessonCard from "@/components/LessonCard";
-import type { Module } from "@/lib/types";
-import { loadProgress, markLessonCompleted, markSectionReached } from "@/lib/storage";
+import type { Confidence, Module } from "@/lib/types";
+import {
+  loadProgress,
+  markLessonCompleted,
+  markSectionReached,
+  setConfidence,
+} from "@/lib/storage";
 
 export default function LessonView({ module }: { module: Module }) {
   const total = module.sections.length;
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   const [ready, setReady] = useState(false);
+  const [confidence, setConf] = useState<Record<string, Confidence>>({});
 
   // חוזרים לנקודה שבה עצרנו בפעם הקודמת
   useEffect(() => {
     const p = loadProgress();
     const reached = p.sectionReached[module.id] ?? 0;
     setIndex(Math.min(reached, total - 1));
+    setConf(p.confidence);
     setReady(true);
   }, [module.id, total]);
 
@@ -38,28 +45,26 @@ export default function LessonView({ module }: { module: Module }) {
   if (finished) {
     return (
       <main className="flex min-h-[70dvh] flex-col justify-center px-4 pt-8">
-        <div className="rise-in rounded-2xl border border-good/30 bg-surface p-6 text-center shadow-(--shadow-card)">
+        <div className="rise-in rounded-3xl border border-good/25 bg-surface p-6 text-center shadow-(--shadow-card-lg)">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-good-tint text-[28px]">
             🎉
           </div>
-          <h1 className="mt-4 font-display text-[24px] font-black">
-            כל הכבוד! סיימת את השיעור
-          </h1>
+          <h1 className="mt-4 text-[24px] font-extrabold">כל הכבוד! סיימת את השיעור</h1>
           <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-            עברת את כל {total} הכרטיסים של «{module.title}». הדרך הטובה ביותר
-            לקבע את הידע היא מבחן קצר — מוכן?
+            עברת את כל {total} הכרטיסים של «{module.title}». אין מבחן ואין ציון —
+            רק ידע חדש שנשאר איתך. בכל זמן אפשר לחזור ולרענן באזור «חזרה».
           </p>
           <Link
-            href={`/quiz/${module.id}`}
-            className="mt-5 block rounded-xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+            href="/review"
+            className="mt-5 block rounded-2xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
           >
-            למבחן הקצר ({module.quiz.length} שאלות)
+            בוא נחזור רגע על מה שלמדת
           </Link>
           <Link
             href="/modules"
-            className="mt-2.5 block rounded-xl border border-line bg-bg px-4 py-3.5 text-[15px] font-semibold text-ink-soft"
+            className="mt-2.5 block rounded-2xl border border-line bg-bg px-4 py-3.5 text-[15px] font-semibold text-ink-soft"
           >
-            חזרה למודולים
+            המשך לשיעור הבא
           </Link>
         </div>
       </main>
@@ -68,6 +73,13 @@ export default function LessonView({ module }: { module: Module }) {
 
   const section = module.sections[index];
   const isLast = index === total - 1;
+  const confKey = `${module.id}:${section.id}`;
+  const currentConf = confidence[confKey];
+
+  function pickConfidence(value: Confidence) {
+    const next = setConfidence(module.id, section.id, value);
+    setConf(next.confidence);
+  }
 
   return (
     <main className="px-4 pt-6">
@@ -87,9 +99,7 @@ export default function LessonView({ module }: { module: Module }) {
             {index + 1} / {total}
           </span>
         </div>
-        <h1 className="mt-2 font-display text-[20px] font-bold leading-snug">
-          {module.title}
-        </h1>
+        <h1 className="mt-2 text-[19px] font-bold leading-snug">{module.title}</h1>
         <div
           className="mt-3 flex gap-1"
           role="progressbar"
@@ -112,6 +122,44 @@ export default function LessonView({ module }: { module: Module }) {
       {/* כרטיס הלימוד הנוכחי */}
       <div className="mt-4" key={section.id}>
         <LessonCard section={section} />
+
+        {/* תחושת ביטחון — לא מבחן, רק סימון אישי */}
+        <div className="mt-3 rounded-2xl border border-line bg-surface/70 p-3.5">
+          <p className="text-center text-[13px] font-semibold text-ink-soft">
+            איך הכרטיס הזה הרגיש לך?
+          </p>
+          <div className="mt-2.5 flex gap-2.5">
+            <button
+              type="button"
+              onClick={() => pickConfidence("got")}
+              aria-pressed={currentConf === "got"}
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-[13.5px] font-semibold transition-colors ${
+                currentConf === "got"
+                  ? "border-good/40 bg-good-tint text-good"
+                  : "border-line bg-bg text-ink-soft active:bg-line"
+              }`}
+            >
+              👍 הבנתי
+            </button>
+            <button
+              type="button"
+              onClick={() => pickConfidence("unsure")}
+              aria-pressed={currentConf === "unsure"}
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-[13.5px] font-semibold transition-colors ${
+                currentConf === "unsure"
+                  ? "border-copper/40 bg-copper-tint text-copper-deep"
+                  : "border-line bg-bg text-ink-soft active:bg-line"
+              }`}
+            >
+              🤔 לא עד הסוף
+            </button>
+          </div>
+          {currentConf === "unsure" && (
+            <p className="mt-2.5 text-center text-[12.5px] leading-relaxed text-ink-faint">
+              זה בסדר גמור. סימנו לך את הכרטיס — הוא יחכה לך באזור «חזרה».
+            </p>
+          )}
+        </div>
       </div>
 
       {/* ניווט בין כרטיסים */}
@@ -120,7 +168,7 @@ export default function LessonView({ module }: { module: Module }) {
           type="button"
           onClick={() => goTo(index - 1)}
           disabled={index === 0}
-          className="rounded-xl border border-line bg-surface px-5 py-3.5 text-[15px] font-semibold text-ink-soft transition-transform active:scale-[0.98] disabled:opacity-40"
+          className="rounded-2xl border border-line bg-surface px-5 py-3.5 text-[15px] font-semibold text-ink-soft transition-transform active:scale-[0.98] disabled:opacity-40"
         >
           הקודם
         </button>
@@ -128,7 +176,7 @@ export default function LessonView({ module }: { module: Module }) {
           <button
             type="button"
             onClick={finish}
-            className="flex-1 rounded-xl bg-good px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+            className="flex-1 rounded-2xl bg-good px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
           >
             סיימתי את השיעור ✓
           </button>
@@ -136,7 +184,7 @@ export default function LessonView({ module }: { module: Module }) {
           <button
             type="button"
             onClick={() => goTo(index + 1)}
-            className="flex-1 rounded-xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+            className="flex-1 rounded-2xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
           >
             הבא
           </button>

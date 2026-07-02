@@ -14,11 +14,11 @@
  * גרסת המטמון (CACHE_VERSION) — יש להעלות אותה כדי לפרסם עדכון.
  * ב-activate מוחקים כל מטמון ישן, כך שתוכן לא נשאר תקוע לנצח.
  */
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const CACHE_NAME = `hlm-${CACHE_VERSION}`;
 
 // שלד האפליקציה שנשמר מראש בהתקנה.
-const APP_SHELL = ["/", "/modules", "/glossary", "/progress"];
+const APP_SHELL = ["/", "/modules", "/glossary", "/review", "/progress"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

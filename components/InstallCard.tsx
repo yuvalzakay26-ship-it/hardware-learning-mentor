@@ -68,14 +68,14 @@ export default function InstallCard() {
   return (
     <section
       aria-label="התקנת האפליקציה"
-      className="mt-6 rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card)"
+      className="mt-6 rounded-2xl border border-line bg-surface/70 p-3"
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-center gap-3">
         <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy text-copper-tint"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-surface-sunken text-ink-soft"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+          <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
             <path
               d="M12 3v10m0 0 3.5-3.5M12 13 8.5 9.5M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"
               stroke="currentColor"
@@ -86,33 +86,33 @@ export default function InstallCard() {
           </svg>
         </div>
         <div className="min-w-0 flex-1">
-          <h2 className="text-[16px] font-bold">התקן כאפליקציה</h2>
-          <p className="mt-0.5 text-[13px] leading-relaxed text-ink-soft">
-            הוסף את מנטור החומרה למסך הבית — פתיחה מהירה במסך מלא, בלי שורת
-            הכתובת.
+          <p className="text-[13.5px] font-semibold text-ink">
+            הוסף למסך הבית — פתיחה במסך מלא
           </p>
-
-          {promptEvent ? (
-            <button
-              onClick={handleInstall}
-              className="mt-3 w-full rounded-xl bg-copper px-4 py-3 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
-            >
-              התקן עכשיו
-            </button>
-          ) : (
-            <p className="mt-3 rounded-xl bg-bg px-3 py-2.5 text-[13px] leading-relaxed text-ink-soft">
-              ב־Android: פתח בכרום ‹ שלוש נקודות ‹ התקנת האפליקציה / הוספה למסך
-              הבית.
+          {!promptEvent && (
+            <p className="mt-0.5 text-[12px] leading-relaxed text-ink-faint">
+              בכרום: שלוש נקודות ‹ התקנת האפליקציה
             </p>
           )}
-
+        </div>
+        {promptEvent ? (
+          <button
+            onClick={handleInstall}
+            className="shrink-0 rounded-xl bg-copper px-3.5 py-2 text-[13.5px] font-bold text-white transition-transform active:scale-[0.98]"
+          >
+            התקן
+          </button>
+        ) : (
           <button
             onClick={dismiss}
-            className="mt-2 text-[12px] font-semibold text-ink-faint"
+            aria-label="אל תציג שוב"
+            className="shrink-0 rounded-lg p-1.5 text-ink-faint transition-colors active:bg-line"
           >
-            אל תציג שוב
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </button>
-        </div>
+        )}
       </div>
     </section>
   );

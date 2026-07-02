@@ -1,22 +1,35 @@
-import type { Progress, QuizResult } from "./types";
+import type { Confidence, Progress } from "./types";
 
 const STORAGE_KEY = "hlm-progress-v1";
 
 export const emptyProgress: Progress = {
   completedLessons: [],
   sectionReached: {},
-  quizResults: {},
+  confidence: {},
   learnedTerms: [],
   lastLessonId: null,
 };
 
+/**
+ * טוען התקדמות מ-localStorage.
+ * מיגרציה בטוחה: גרסאות ישנות של האפליקציה שמרו כאן גם נתוני מבחנים
+ * (quizResults). אנחנו פשוט מתעלמים מהם — נשמרים רק השדות המוכרים,
+ * כך שהאפליקציה לא נשברת גם אם קיים מידע ישן.
+ */
 export function loadProgress(): Progress {
   if (typeof window === "undefined") return emptyProgress;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyProgress;
-    const parsed = JSON.parse(raw) as Partial<Progress>;
-    return { ...emptyProgress, ...parsed };
+    const parsed = JSON.parse(raw) as Partial<Progress> & Record<string, unknown>;
+    // בונים אובייקט נקי מהשדות המוכרים בלבד — נתוני מבחנים ישנים נזרקים.
+    return {
+      completedLessons: parsed.completedLessons ?? [],
+      sectionReached: parsed.sectionReached ?? {},
+      confidence: parsed.confidence ?? {},
+      learnedTerms: parsed.learnedTerms ?? [],
+      lastLessonId: parsed.lastLessonId ?? null,
+    };
   } catch {
     return emptyProgress;
   }
@@ -56,18 +69,24 @@ export function markLessonCompleted(lessonId: string): Progress {
   return next;
 }
 
-export function saveQuizResult(lessonId: string, result: QuizResult): Progress {
+/**
+ * שומר את תחושת הביטחון בכרטיס לימוד. לחיצה חוזרת על אותה תחושה מבטלת אותה.
+ * זה לא ציון ולא מבחן — רק סימון אישי שעוזר לדעת על מה כדאי לחזור.
+ */
+export function setConfidence(
+  lessonId: string,
+  sectionId: string,
+  value: Confidence
+): Progress {
   const p = loadProgress();
-  const previous = p.quizResults[lessonId];
-  // שומרים את התוצאה הטובה ביותר
-  const best =
-    previous && previous.score / previous.total > result.score / result.total
-      ? previous
-      : result;
-  const next: Progress = {
-    ...p,
-    quizResults: { ...p.quizResults, [lessonId]: best },
-  };
+  const key = `${lessonId}:${sectionId}`;
+  const confidence = { ...p.confidence };
+  if (confidence[key] === value) {
+    delete confidence[key];
+  } else {
+    confidence[key] = value;
+  }
+  const next: Progress = { ...p, confidence };
   saveProgress(next);
   return next;
 }

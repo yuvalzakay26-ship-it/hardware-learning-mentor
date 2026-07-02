@@ -32,27 +32,33 @@ export default function ModuleCard({
 
   const card = (
     <div
-      className={`flex items-center gap-4 rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card) transition-transform ${
-        locked ? "opacity-60" : "active:scale-[0.985]"
+      className={`flex items-center gap-4 rounded-2xl border p-4 transition-transform ${
+        locked
+          ? "border-dashed border-line bg-transparent"
+          : "border-line bg-surface shadow-(--shadow-card) active:scale-[0.985]"
       }`}
     >
       {/* השבב */}
       <div className="relative shrink-0" aria-hidden="true">
-        <div className="absolute inset-x-2 -top-1 flex justify-between px-1">
-          {[0, 1, 2, 3].map((i) => (
-            <span key={i} className="h-1.5 w-0.5 rounded-sm bg-ink-faint/60" />
-          ))}
-        </div>
-        <div className="absolute inset-x-2 -bottom-1 flex justify-between px-1">
-          {[0, 1, 2, 3].map((i) => (
-            <span key={i} className="h-1.5 w-0.5 rounded-sm bg-ink-faint/60" />
-          ))}
-        </div>
+        {!locked && (
+          <>
+            <div className="absolute inset-x-2 -top-1 flex justify-between px-1">
+              {[0, 1, 2, 3].map((i) => (
+                <span key={i} className="h-1.5 w-0.5 rounded-sm bg-ink-faint/60" />
+              ))}
+            </div>
+            <div className="absolute inset-x-2 -bottom-1 flex justify-between px-1">
+              {[0, 1, 2, 3].map((i) => (
+                <span key={i} className="h-1.5 w-0.5 rounded-sm bg-ink-faint/60" />
+              ))}
+            </div>
+          </>
+        )}
         <div
-          className={`flex h-14 w-14 items-center justify-center rounded-lg font-mono text-[11px] font-bold tracking-wider shadow-(--shadow-chip) ${
+          className={`flex h-14 w-14 items-center justify-center rounded-lg font-mono text-[11px] font-bold tracking-wider ${
             locked
-              ? "bg-ink-faint/30 text-ink-soft"
-              : "bg-navy text-copper-tint"
+              ? "bg-surface-sunken text-ink-faint"
+              : "bg-navy text-copper-tint shadow-(--shadow-chip)"
           }`}
           dir="ltr"
         >
@@ -72,17 +78,21 @@ export default function ModuleCard({
                 : status === "in-progress"
                   ? "bg-copper-tint text-copper-deep"
                   : status === "new"
-                    ? "bg-bg text-ink-soft"
-                    : "bg-bg text-ink-faint"
+                    ? "bg-surface-sunken text-ink-soft"
+                    : "bg-transparent text-ink-faint"
             }`}
           >
             {statusLabel[status]}
           </span>
         </div>
-        <h3 className="mt-0.5 truncate font-display text-[17px] font-bold leading-snug">
+        <h3
+          className={`mt-0.5 truncate text-[17px] font-bold leading-snug ${
+            locked ? "text-ink-soft" : ""
+          }`}
+        >
           {m.title}
         </h3>
-        <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-ink-soft">
+        <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-ink-faint">
           {m.subtitle}
         </p>
         {m.available && (

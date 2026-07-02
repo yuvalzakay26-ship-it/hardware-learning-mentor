@@ -29,11 +29,11 @@ const items = [
     ),
   },
   {
-    href: "/quiz",
-    label: "מבחנים",
+    href: "/glossary",
+    label: "מושגים",
     icon: (
       <path
-        d="M9 11.5 11 13.5 15.5 9M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z"
+        d="M5 4.5h11a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2v-13ZM5 16.5a2 2 0 0 1 2-2h11M9 8.5h5"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -41,11 +41,11 @@ const items = [
     ),
   },
   {
-    href: "/glossary",
-    label: "מילון",
+    href: "/review",
+    label: "חזרה",
     icon: (
       <path
-        d="M5 4.5h11a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2v-13ZM5 16.5a2 2 0 0 1 2-2h11M9 8.5h5"
+        d="M4.5 12a7.5 7.5 0 1 1 2.2 5.3M4.5 12V7.5M4.5 12H9"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -72,9 +72,9 @@ export default function BottomNav() {
   return (
     <nav
       aria-label="ניווט ראשי"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface/95 backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface/90 backdrop-blur-md"
     >
-      <div className="mx-auto flex max-w-lg items-stretch justify-around px-2 pb-[env(safe-area-inset-bottom)]">
+      <div className="mx-auto flex max-w-lg items-stretch justify-around px-1.5 pb-[env(safe-area-inset-bottom)]">
         {items.map((item) => {
           const active =
             item.href === "/"
@@ -86,20 +86,26 @@ export default function BottomNav() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`flex flex-1 flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium transition-colors ${
+              className={`group flex flex-1 flex-col items-center gap-1 pt-2 pb-1.5 text-[11px] font-medium transition-colors ${
                 active ? "text-copper" : "text-ink-faint hover:text-ink-soft"
               }`}
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="h-6 w-6"
-                aria-hidden="true"
+              <span
+                className={`flex h-8 w-12 items-center justify-center rounded-full transition-colors ${
+                  active ? "bg-copper-tint" : "bg-transparent"
+                }`}
               >
-                {item.icon}
-              </svg>
-              {item.label}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  className="h-[22px] w-[22px]"
+                  aria-hidden="true"
+                >
+                  {item.icon}
+                </svg>
+              </span>
+              <span className={active ? "font-semibold" : ""}>{item.label}</span>
             </Link>
           );
         })}

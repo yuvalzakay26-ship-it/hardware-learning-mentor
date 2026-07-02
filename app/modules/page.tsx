@@ -12,8 +12,8 @@ export default function ModulesPage() {
   return (
     <main className="px-4 pt-8">
       <header>
-        <p className="text-[14px] font-semibold text-copper-deep">מסלול הלמידה</p>
-        <h1 className="mt-1 font-display text-[28px] font-black leading-tight">
+        <p className="eyebrow">מסלול הלמידה</p>
+        <h1 className="mt-1.5 text-[28px] font-extrabold leading-tight">
           מודולי הלימוד
         </h1>
         <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
@@ -34,7 +34,7 @@ export default function ModulesPage() {
       </section>
 
       <section aria-label="מודולים עתידיים" className="mt-8">
-        <h2 className="mb-3 font-display text-[18px] font-bold text-ink-soft">
+        <h2 className="mb-3 text-[18px] font-bold text-ink-faint">
           בהמשך המסלול
         </h2>
         <div className="space-y-3">
