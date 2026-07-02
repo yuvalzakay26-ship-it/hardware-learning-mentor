@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+  מערכת העיצוב: "סיליקון ונחושת"
+  רקע לבן-מעבדה, דיו כחול-כהה כמו הדפסה על שבב, ונחושת — צבע המוליכים על הלוח.
+*/
+@theme {
+  --color-bg: #f3f5f8; /* לבן-מעבדה קריר */
+  --color-surface: #ffffff;
+  --color-ink: #13223a; /* כחול-דיו כהה */
+  --color-ink-soft: #5b6b82;
+  --color-ink-faint: #8b98ab;
+  --color-line: #e2e7ee;
+  --color-copper: #b3541e; /* נחושת — צבע המוליכים */
+  --color-copper-deep: #93430f;
+  --color-copper-tint: #faeadd;
+  --color-navy: #16263f; /* גוף השבב */
+  --color-navy-deep: #0d1830;
+  --color-good: #1e7f5c;
+  --color-good-tint: #e4f2eb;
+  --color-bad: #b23a3f;
+  --color-bad-tint: #f9e8e8;
+
+  --font-body: var(--font-heebo), system-ui, sans-serif;
+  --font-display: var(--font-frank), serif;
+
+  --shadow-card: 0 1px 2px rgb(19 34 58 / 0.04), 0 4px 16px rgb(19 34 58 / 0.06);
+  --shadow-chip: 0 2px 4px rgb(13 24 48 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* קו-מתאר של מקלדת — נגישות */
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* אנימציית כניסה עדינה לכרטיסים */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.35s ease-out both;
+}
