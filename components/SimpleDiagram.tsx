@@ -293,11 +293,38 @@ function TargetDevices() {
   );
 }
 
+function TypecFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "יציאת Type-C", sub: "Type-C Port — המחבר על הלוח", tone: "dark" },
+    { label: "כבל / מתאם / דוק", sub: "Cable / Adapter / Dock — מה שמחברים", tone: "light" },
+    { label: "ההתקן", sub: "Device — מסך, כונן, מטען ועוד", tone: "blue" },
+    { label: "נתיב הפלטפורמה / בקר / TCSS", sub: "מי מנהל את מה שעובר — תלוי בארכיטקטורה", tone: "dark" },
+    { label: "BIOS / מערכת הפעלה / לוגים", sub: "איפה רואים אם זה עבד", tone: "blue" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        המסלול של Type-C: מהמחבר ועד ללוגים
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תקלה יכולה לשבת בכל אחת מהתחנות — לא רק ביציאה עצמה.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
   if (kind === "boot-flow") return <BootFlow />;
   if (kind === "post-flow") return <PostFlow />;
   if (kind === "target-devices") return <TargetDevices />;
+  if (kind === "typec-flow") return <TypecFlow />;
   return <HostSutSsh />;
 }

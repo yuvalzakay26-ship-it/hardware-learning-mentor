@@ -6,7 +6,8 @@ export type DiagramKind =
   | "host-sut-ssh"
   | "boot-flow"
   | "post-flow"
-  | "target-devices";
+  | "target-devices"
+  | "typec-flow";
 
 export type Block =
   | { type: "p"; text: string }
