@@ -314,7 +314,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "כשמריצים פקודה מה-Host, היא מתבצעת על ה-Target — המערכת הפיזית הנבדקת.",
     workplace:
       "אומרים 'הרכיב מזוהה על ה-Target?' כדי לבדוק אם החומרה הנבדקת רואה את ההתקן.",
-    related: ["sut", "host", "m2", "typec"],
+    related: ["sut", "host", "hardware-device", "connector", "m2", "typec"],
   },
 
   // ── חיבור מרחוק ו-Debug ──
@@ -582,7 +582,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "כונן ה-SSD המהיר של המחשב הוא לרוב מקל קטן שתקוע בחריץ M.2.",
     workplace:
       "בבדיקת Target מוודאים שההתקן שבחריץ ה-M.2 מזוהה, עובד במהירות הנכונה ויציב בעומס.",
-    related: ["target", "typec", "j5"],
+    related: ["target", "ssd", "connector", "j5"],
   },
   {
     id: "j5",
@@ -594,7 +594,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "בהוראת בדיקה כתוב 'חבר את כבל ה-Debug ל-J5' — כלומר למחבר שמסומן J5 על הלוח.",
     workplace:
       "קריאת מספרי מחברים (J5 וכו') מהסכמה ומהלוח היא כלי יומיומי כדי לחבר את הכבל הנכון למקום הנכון.",
-    related: ["target", "m2", "motherboard"],
+    related: ["ref-designator", "connector", "board", "m2"],
   },
   {
     id: "tcss",
@@ -619,6 +619,114 @@ export const glossaryTerms: GlossaryTerm[] = [
     workplace:
       "יציאות ה-USB מנוהלות דרך ה-PCH — כשיציאה לא עובדת, זה כיוון החקירה הראשון.",
     related: ["typec", "pch"],
+  },
+  {
+    id: "hardware-device",
+    en: "Hardware Device",
+    he: "התקן חומרה",
+    category: "io",
+    explanation:
+      "רכיב פיזי או יחידה שמחוברת למערכת ושהמערכת יכולה להשתמש בה — משהו אמיתי, לא תוכנה. יכול להיות פנימי (על הלוח) או חיצוני (מחובר בכבל).",
+    example: "כונן SSD, דיסק-און-קי, מתאם רשת או כלי Debug — כולם התקני חומרה.",
+    workplace:
+      "הרבה בדיקות מתמקדות בשאלה 'האם ההתקן מזוהה ועובד תקין על ה-Target?'.",
+    related: ["target", "connector", "device-detection", "usb"],
+  },
+  {
+    id: "connector",
+    en: "Connector",
+    he: "מחבר — המקום הפיזי שאליו מחברים",
+    category: "board",
+    explanation:
+      "הנקודה הפיזית על הלוח או המכשיר שאליה מתחבר משהו — כבל, כרטיס או רכיב. אפשר לגעת בו ולהצביע עליו. בשפת היומיום 'מחבר' ו'יציאה' משמשים לעיתים לאותו דבר.",
+    example: "חריץ ה-M.2 ומחבר ה-Debug על הלוח הם דוגמאות למחברים.",
+    workplace:
+      "כשקוראים הוראת בדיקה 'חבר ל-J5', מזהים קודם את המחבר הנכון על הלוח.",
+    related: ["port", "j5", "hardware-device", "ref-designator"],
+  },
+  {
+    id: "port",
+    en: "Port",
+    he: "יציאה — נקודת חיבור להתקן או כבל",
+    category: "io",
+    explanation:
+      "נקודת חיבור שדרכה מכניסים התקן או כבל אל המערכת. היציאה היא המקום שאליו מחברים; ההתקן הוא מה שמחברים אליה.",
+    example: "יציאת USB או יציאת Type-C שאליהן תוקעים כבל או התקן.",
+    workplace:
+      "בבדיקה מוודאים שכל יציאה מזהה את מה שמחובר אליה ומעבירה נתונים/חשמל כנדרש.",
+    related: ["connector", "usb", "typec", "hardware-device"],
+  },
+  {
+    id: "ssd",
+    en: "SSD",
+    he: "כונן אחסון מהיר ללא חלקים נעים",
+    category: "io",
+    explanation:
+      "ראשי תיבות של Solid State Drive — 'כונן במצב מוצק'. התקן אחסון ששומר עליו קבצים בלי חלקים מסתובבים, ולכן מהיר ושקט. לרוב יושב בחריץ M.2.",
+    example: "כונן ה-SSD שעליו מותקנת מערכת ההפעלה של המערכת הנבדקת.",
+    workplace:
+      "בבדיקת אחסון מוודאים שה-SSD מזוהה, אפשר לאתחל ממנו, והוא עומד במהירות ובעומס.",
+    related: ["m2", "hardware-device", "device-detection"],
+  },
+  {
+    id: "ref-designator",
+    en: "Reference Designator",
+    he: "מזהה רכיב — תווית על הלוח",
+    category: "board",
+    explanation:
+      "תווית מודפסת על הלוח שמזהה רכיב או מחבר מסוים. למשל J5 למחבר, U1 לשבב, C3 לקבל. כך כל רכיב מקבל 'שם פרטי' קבוע שאפשר לדבר עליו בלי בלבול.",
+    example: "בסכמת הלוח ובלוח עצמו מופיע 'J5' ליד מחבר מסוים — זה ה-Reference Designator שלו.",
+    workplace:
+      "קריאת המזהים מהלוח ומהתיעוד מאפשרת לחבר את הכבל הנכון למקום הנכון.",
+    related: ["j5", "connector", "board", "documentation"],
+  },
+  {
+    id: "board",
+    en: "Board",
+    he: "לוח אלקטרוני",
+    category: "board",
+    explanation:
+      "הלוח האלקטרוני שעליו יושבים השבבים, המחברים והרכיבים. בבדיקת חומרה ה-Target הוא לעיתים לוח חשוף שמונח פתוח על השולחן, בלי מארז.",
+    example: "לוח נבדק שמונח על מתקן עם ספק כוח וכבלי Debug מחוברים אליו.",
+    workplace:
+      "לכל לוח יש תיעוד משלו — אותו מחבר (למשל J5) עשוי להיות שונה בין לוח ללוח.",
+    related: ["motherboard", "ref-designator", "connector", "target"],
+  },
+  {
+    id: "adapter",
+    en: "Adapter",
+    he: "מתאם — ממיר בין סוגי חיבור",
+    category: "io",
+    explanation:
+      "רכיב קטן שממיר סוג חיבור אחד לאחר, כדי לחבר בין דברים שלא מתאימים ישירות. למשל מתאם מ-Type-C ליציאת רשת.",
+    example: "מתאם Type-C ל-USB מאפשר לחבר התקן USB ישן ליציאת Type-C חדשה.",
+    workplace:
+      "כשמשתמשים במתאם בבדיקה, חשוב לתעד אותו — לפעמים המתאם עצמו הוא מקור התקלה.",
+    related: ["cable", "typec", "usb", "port"],
+  },
+  {
+    id: "cable",
+    en: "Cable",
+    he: "כבל — מחבר פיזית בין רכיבים",
+    category: "io",
+    explanation:
+      "חוט שמחבר פיזית בין רכיבים, או בין הלוח לספק כוח או לכלי בדיקה. הכבל מעביר נתונים, חשמל או שניהם, תלוי בסוג.",
+    example: "כבל Debug שמחבר את כלי החקירה למחבר על הלוח, או כבל חשמל לספק הכוח.",
+    workplace:
+      "כבל פגום או לא מחובר טוב הוא סיבה נפוצה ל'תקלה' שבעצם אינה תקלה של הרכיב עצמו.",
+    related: ["adapter", "connector", "frame", "device-detection"],
+  },
+  {
+    id: "device-detection",
+    en: "Device Detection",
+    he: "זיהוי התקן",
+    category: "validation",
+    explanation:
+      "התהליך שבו המערכת 'מגלה' שהתקן מחובר אליה ויודעת להשתמש בו. אם התקן לא מזוהה, הוא כאילו לא קיים מבחינת המערכת — גם אם הוא מחובר פיזית.",
+    example: "מחברים כונן M.2 ובודקים ב-BIOS או בלוגים אם המערכת מזהה אותו.",
+    workplace:
+      "כשל בזיהוי התקן הוא בדיקה נפוצה — וכיוון החקירה כולל את ההתקן, הכבל, החריץ, ה-BIOS והנתיב.",
+    related: ["hardware-device", "ssd", "log", "post"],
   },
 
   // ── חיבורי Debug מתקדמים ──

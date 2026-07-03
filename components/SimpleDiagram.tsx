@@ -234,10 +234,70 @@ function PostFlow() {
   );
 }
 
+function TargetDevices() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מי מחובר למי: מהבודק ועד רכיבי החומרה על ה-Target
+      </figcaption>
+
+      {/* ה-Host — מחשב הבודק */}
+      <Box
+        label="Host — מחשב הבודק"
+        sub="ממנו עובדים ושולחים פקודות ובדיקות"
+        tone="dark"
+        className="py-2.5"
+      />
+
+      <Wire label="חיבור / רשת" />
+
+      {/* ה-Target / SUT — המערכת הנבדקת */}
+      <Box
+        label="Target / SUT — המערכת הנבדקת"
+        sub="הלוח או המחשב שאותו בודקים בפועל"
+        tone="blue"
+        className="py-2.5"
+      />
+
+      <Wire label="על הלוח" />
+
+      {/* שכבת המחברים והיציאות */}
+      <Box
+        label="מחברים ויציאות"
+        sub="Connectors & Ports — הנקודות שאליהן מחברים דברים"
+        className="py-2.5"
+      />
+
+      <div className="grid grid-cols-2 gap-2 pt-1" aria-hidden="true">
+        {[0, 1].map((i) => (
+          <div key={i} className="flex justify-center">
+            <span className="h-4 w-0.5 bg-blue/70" />
+          </div>
+        ))}
+      </div>
+
+      {/* רכיבי החומרה עצמם */}
+      <div className="grid grid-cols-2 gap-2">
+        <Box label="M.2" sub="כונן SSD פנימי" />
+        <Box label="Type-C" sub="נתונים / חשמל / מסך" />
+        <Box label="J5" sub="מחבר ממוספר על הלוח" />
+        <Box label="USB" sub="עכבר, דיסק-און-קי" />
+        <Box label="Debug" sub="מחבר לחקירת תקלות" />
+        <Box label="עוד רכיבים" sub="רשת, חיישנים ועוד" />
+      </div>
+
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        הבודק תמיד שואל: מה מחובר, לאן זה מתחבר, ואיך זה משפיע על הבדיקה.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
   if (kind === "boot-flow") return <BootFlow />;
   if (kind === "post-flow") return <PostFlow />;
+  if (kind === "target-devices") return <TargetDevices />;
   return <HostSutSsh />;
 }
