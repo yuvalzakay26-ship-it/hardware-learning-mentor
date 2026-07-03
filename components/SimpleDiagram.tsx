@@ -143,6 +143,47 @@ function CpuPch() {
   );
 }
 
+function HostSutSsh() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        איך ה-Host מתחבר ל-SUT דרך PuTTY / SSH
+      </figcaption>
+
+      {/* ה-Host — המחשב שממנו הבודק עובד */}
+      <Box
+        label="Host — מחשב הבודק"
+        sub="ממנו פותחים את PuTTY ושולחים פקודות"
+        tone="dark"
+        className="py-2.5"
+      />
+
+      <Wire label="PuTTY / SSH" />
+
+      {/* ה-SUT — המערכת הנבדקת */}
+      <Box
+        label="SUT — המערכת הנבדקת"
+        sub="מקבלת את הפקודות ומריצה אותן"
+        tone="blue"
+        className="py-2.5"
+      />
+
+      <div className="flex flex-col items-center py-0.5" aria-hidden="true">
+        <span className="h-4 w-0.5 bg-blue/70" />
+      </div>
+
+      {/* מה חוזר בחזרה אל הבודק */}
+      <div className="grid grid-cols-3 gap-2">
+        <Box label="Logs" sub="יומני מערכת" />
+        <Box label="Commands" sub="פקודות שרצות" />
+        <Box label="Debug" sub="מידע לחקירה" />
+      </div>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
-  return kind === "cpu-inside" ? <CpuInside /> : <CpuPch />;
+  if (kind === "cpu-inside") return <CpuInside />;
+  if (kind === "cpu-pch") return <CpuPch />;
+  return <HostSutSsh />;
 }

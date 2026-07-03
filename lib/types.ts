@@ -1,6 +1,6 @@
 // טיפוסים משותפים לכל מערכת הלמידה
 
-export type DiagramKind = "cpu-inside" | "cpu-pch";
+export type DiagramKind = "cpu-inside" | "cpu-pch" | "host-sut-ssh";
 
 export type Block =
   | { type: "p"; text: string }
