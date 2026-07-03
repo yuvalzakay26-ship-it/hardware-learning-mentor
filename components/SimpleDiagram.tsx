@@ -208,9 +208,36 @@ function BootFlow() {
   );
 }
 
+function PostFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "לחיצה על כפתור ההפעלה", sub: "Power On — הזרם מגיע ללוח", tone: "light" },
+    { label: "BIOS / UEFI מתעורר", sub: "הקושחה הראשונה שרצה במחשב", tone: "dark" },
+    { label: "נקודות ביקורת של הבדיקה", sub: "POST Checkpoints — תחנות לאורך ההדלקה", tone: "blue" },
+    { label: "הקוד מוצג החוצה", sub: "POST Code / Port 80 — המספר של התחנה הנוכחית", tone: "light" },
+    { label: "רמז לחקירת תקלה", sub: "Clue for Debug — איפה בערך נעצרה ההדלקה", tone: "blue" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        איך קוד ה-POST הופך לרמז לחקירה
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        הקוד לא 'מתקן' כלום — הוא רק מספר לך עד לאיזו תחנה המערכת הגיעה.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
   if (kind === "boot-flow") return <BootFlow />;
+  if (kind === "post-flow") return <PostFlow />;
   return <HostSutSsh />;
 }

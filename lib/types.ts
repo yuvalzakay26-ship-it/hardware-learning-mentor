@@ -4,7 +4,8 @@ export type DiagramKind =
   | "cpu-inside"
   | "cpu-pch"
   | "host-sut-ssh"
-  | "boot-flow";
+  | "boot-flow"
+  | "post-flow";
 
 export type Block =
   | { type: "p"; text: string }
