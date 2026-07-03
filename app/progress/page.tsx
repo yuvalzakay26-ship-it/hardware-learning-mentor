@@ -62,7 +62,7 @@ export default function ProgressPage() {
         {nextLesson ? (
           <Link
             href={`/lesson/${nextLesson.id}`}
-            className="block rounded-2xl border border-copper/25 bg-copper-tint/60 p-4 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
+            className="block rounded-2xl border border-blue/25 bg-blue-tint/60 p-4 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
           >
             <div className="eyebrow">השיעור המומלץ הבא</div>
             <div className="mt-1 text-[17px] font-bold">{nextLesson.title}</div>
@@ -108,7 +108,7 @@ export default function ProgressPage() {
                       done
                         ? "bg-good-tint text-good"
                         : started
-                          ? "bg-copper-tint text-copper-deep"
+                          ? "bg-blue-tint text-blue-deep"
                           : "bg-surface-sunken text-ink-faint"
                     }`}
                   >
@@ -117,7 +117,7 @@ export default function ProgressPage() {
                 </div>
                 <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-line-soft">
                   <div
-                    className="h-full rounded-full bg-copper transition-all duration-500"
+                    className="h-full rounded-full bg-gradient-to-l from-blue to-sky transition-all duration-500"
                     style={{ width: `${started ? Math.max(lessonPercent, 4) : 0}%` }}
                   />
                 </div>

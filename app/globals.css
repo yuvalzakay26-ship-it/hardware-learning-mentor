@@ -1,24 +1,26 @@
 @import "tailwindcss";
 
 /*
-  מערכת העיצוב: "סיליקון ונחושת" — גרסה נקייה ומודרנית
-  רקע לבן-מעבדה, דיו כחול-כהה כמו הדפסה על שבב, ונחושת — צבע המוליכים על הלוח.
+  מערכת העיצוב: "סיליקון וכחול" — גרסה נקייה ומודרנית, בהשראת עולם הטק
+  רקע לבן-כחלחל קריר, דיו כחול-נייבי כהה כמו הדפסה על שבב,
+  וכחול-טכנולוגי (עם נגיעת תכלת) כצבע ההדגשה של המערכת.
   הטיפוגרפיה: Rubik לכותרות (מודרני, טק), Assistant לגוף (קריא מאוד בנייד).
 */
 @theme {
-  --color-bg: #f4f6f9; /* לבן-מעבדה קריר */
+  --color-bg: #f5f9fc; /* לבן-כחלחל קריר */
   --color-surface: #ffffff;
-  --color-surface-sunken: #eef1f5; /* משטח שקוע עדין לתוך-כרטיס */
-  --color-ink: #13223a; /* כחול-דיו כהה */
-  --color-ink-soft: #566579;
-  --color-ink-faint: #8b98ab;
-  --color-line: #e4e8ee;
-  --color-line-soft: #eef1f5;
-  --color-copper: #b3541e; /* נחושת — צבע המוליכים */
-  --color-copper-deep: #8f3f11;
-  --color-copper-tint: #fbeadd;
-  --color-navy: #16263f; /* גוף השבב */
-  --color-navy-deep: #0d1830;
+  --color-surface-sunken: #eaf1f8; /* משטח שקוע עדין לתוך-כרטיס */
+  --color-ink: #0f172a; /* נייבי-דיו כהה */
+  --color-ink-soft: #475569;
+  --color-ink-faint: #8496ac;
+  --color-line: #dbe6f1;
+  --color-line-soft: #eaf1f8;
+  --color-blue: #0068b5; /* כחול ראשי — צבע ההדגשה */
+  --color-blue-deep: #04529a; /* כחול עמוק לטקסט וניגודיות */
+  --color-blue-tint: #eaf4fb; /* תכלת חיוור לרקעים עדינים */
+  --color-sky: #00aeef; /* תכלת-הדגשה בהיר (סיאן) */
+  --color-navy: #0f2544; /* נייבי עמוק לפאנלים כהים */
+  --color-navy-deep: #0a1a33;
   --color-good: #1e7f5c;
   --color-good-tint: #e6f3ec;
   --color-bad: #b23a3f;
@@ -29,9 +31,9 @@
   --font-display: var(--font-rubik), var(--font-assistant), sans-serif;
 
   /* צללים רכים ומדורגים — עומק בלי כובד */
-  --shadow-card: 0 1px 2px rgb(19 34 58 / 0.04), 0 2px 8px rgb(19 34 58 / 0.05);
-  --shadow-card-lg: 0 2px 4px rgb(19 34 58 / 0.05), 0 12px 32px rgb(19 34 58 / 0.09);
-  --shadow-chip: 0 2px 6px rgb(13 24 48 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --shadow-card: 0 1px 2px rgb(15 37 68 / 0.04), 0 2px 8px rgb(15 37 68 / 0.06);
+  --shadow-card-lg: 0 2px 4px rgb(15 37 68 / 0.05), 0 12px 32px rgb(15 37 68 / 0.10);
+  --shadow-chip: 0 2px 6px rgb(10 26 51 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.1);
 }
 
 html {
@@ -67,13 +69,13 @@ h3 {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--color-copper-deep);
+  color: var(--color-blue-deep);
   text-transform: none;
 }
 
 /* קו-מתאר של מקלדת — נגישות */
 :focus-visible {
-  outline: 2px solid var(--color-copper);
+  outline: 2px solid var(--color-blue);
   outline-offset: 2px;
   border-radius: 6px;
 }

@@ -8,12 +8,12 @@ function BlockView({ block }: { block: Block }) {
 
     case "term":
       return (
-        <div className="rounded-xl border border-copper/25 bg-copper-tint/60 p-4">
+        <div className="rounded-xl border border-blue/25 bg-blue-tint/60 p-4">
           <div className="flex items-baseline gap-2">
-            <span className="font-mono text-[15px] font-bold text-copper-deep" dir="ltr">
+            <span className="font-mono text-[15px] font-bold text-blue-deep" dir="ltr">
               {block.term}
             </span>
-            <span className="text-[11px] font-semibold text-copper-deep/70">
+            <span className="text-[11px] font-semibold text-blue-deep/70">
               מונח חדש
             </span>
           </div>
@@ -30,7 +30,7 @@ function BlockView({ block }: { block: Block }) {
           {block.items.map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[15px] leading-relaxed">
               <span
-                className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-copper"
+                className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue"
                 aria-hidden="true"
               />
               <span>{item}</span>
@@ -81,8 +81,8 @@ function BlockView({ block }: { block: Block }) {
 
     case "tip":
       return (
-        <div className="rounded-xl border-s-4 border-copper bg-surface p-4 shadow-(--shadow-card)">
-          <div className="text-[13px] font-bold text-copper-deep">
+        <div className="rounded-xl border-s-4 border-blue bg-surface p-4 shadow-(--shadow-card)">
+          <div className="text-[13px] font-bold text-blue-deep">
             {block.title ?? "טיפ מהמנטור"}
           </div>
           <p className="mt-1 text-[14.5px] leading-relaxed text-ink-soft">{block.text}</p>
@@ -101,11 +101,11 @@ function BlockView({ block }: { block: Block }) {
               className="group rounded-xl border border-line bg-surface p-4"
             >
               <summary className="cursor-pointer list-none text-[15px] font-semibold leading-relaxed marker:hidden">
-                <span className="me-2 font-mono text-[13px] font-bold text-copper" dir="ltr">
+                <span className="me-2 font-mono text-[13px] font-bold text-blue" dir="ltr">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 {item.q}
-                <span className="mt-1.5 block text-[12px] font-medium text-copper-deep group-open:hidden">
+                <span className="mt-1.5 block text-[12px] font-medium text-blue-deep group-open:hidden">
                   לחץ לחשיפת התשובה
                 </span>
               </summary>

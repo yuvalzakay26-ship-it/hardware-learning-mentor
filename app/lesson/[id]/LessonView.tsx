@@ -56,7 +56,7 @@ export default function LessonView({ module }: { module: Module }) {
           </p>
           <Link
             href="/review"
-            className="mt-5 block rounded-2xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+            className="mt-5 block rounded-2xl bg-blue px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
           >
             בוא נחזור רגע על מה שלמדת
           </Link>
@@ -112,7 +112,7 @@ export default function LessonView({ module }: { module: Module }) {
             <span
               key={s.id}
               className={`h-1.5 flex-1 rounded-full transition-colors ${
-                i <= index ? "bg-copper" : "bg-line"
+                i <= index ? "bg-blue" : "bg-line"
               }`}
             />
           ))}
@@ -147,7 +147,7 @@ export default function LessonView({ module }: { module: Module }) {
               aria-pressed={currentConf === "unsure"}
               className={`flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-[13.5px] font-semibold transition-colors ${
                 currentConf === "unsure"
-                  ? "border-copper/40 bg-copper-tint text-copper-deep"
+                  ? "border-blue/40 bg-blue-tint text-blue-deep"
                   : "border-line bg-bg text-ink-soft active:bg-line"
               }`}
             >
@@ -184,7 +184,7 @@ export default function LessonView({ module }: { module: Module }) {
           <button
             type="button"
             onClick={() => goTo(index + 1)}
-            className="flex-1 rounded-2xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+            className="flex-1 rounded-2xl bg-blue px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
           >
             הבא
           </button>

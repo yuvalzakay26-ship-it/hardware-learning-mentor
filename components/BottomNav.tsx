@@ -87,12 +87,12 @@ export default function BottomNav() {
               href={item.href}
               aria-current={active ? "page" : undefined}
               className={`group flex flex-1 flex-col items-center gap-1 pt-2 pb-1.5 text-[11px] font-medium transition-colors ${
-                active ? "text-copper" : "text-ink-faint hover:text-ink-soft"
+                active ? "text-blue" : "text-ink-faint hover:text-ink-soft"
               }`}
             >
               <span
                 className={`flex h-8 w-12 items-center justify-center rounded-full transition-colors ${
-                  active ? "bg-copper-tint" : "bg-transparent"
+                  active ? "bg-blue-tint" : "bg-transparent"
                 }`}
               >
                 <svg

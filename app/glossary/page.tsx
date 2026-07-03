@@ -60,7 +60,7 @@ export default function ConceptsPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="חפש מושג… (למשל: Cache)"
-          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-[15px] shadow-(--shadow-card) placeholder:text-ink-faint focus:border-copper focus:outline-none"
+          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-[15px] shadow-(--shadow-card) placeholder:text-ink-faint focus:border-blue focus:outline-none"
         />
       </div>
 

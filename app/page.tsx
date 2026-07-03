@@ -60,7 +60,7 @@ export default function HomePage() {
           <span className="text-[13px] font-semibold text-white/70">
             {hasStartedAnything ? "ממשיכים מאיפה שעצרת" : "מוכן להתחיל?"}
           </span>
-          <span className="font-mono text-[13px] font-bold text-copper-tint" dir="ltr">
+          <span className="font-mono text-[13px] font-bold text-blue-tint" dir="ltr">
             {ready ? `${percent}%` : "—"}
           </span>
         </div>
@@ -74,7 +74,7 @@ export default function HomePage() {
 
         <div className="mt-3.5 h-2 overflow-hidden rounded-full bg-white/15">
           <div
-            className="h-full rounded-full bg-copper transition-all duration-700"
+            className="h-full rounded-full bg-gradient-to-l from-blue to-sky transition-all duration-700"
             style={{ width: ready ? `${Math.max(percent, 2)}%` : "2%" }}
           />
         </div>
@@ -84,7 +84,7 @@ export default function HomePage() {
 
         <Link
           href={`/lesson/${continueModule.id}`}
-          className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-copper px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+          className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-blue px-4 py-3.5 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
         >
           {hasStartedAnything ? "המשך ללמוד" : "התחל ללמוד"}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4" aria-hidden="true">
@@ -100,7 +100,7 @@ export default function HomePage() {
             href={`/lesson/${continueModule.id}`}
             className="flex items-start gap-3 rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
           >
-            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-copper-tint text-[17px]" aria-hidden="true">
+            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-tint text-[17px]" aria-hidden="true">
               🎯
             </span>
             <div className="min-w-0 flex-1">
@@ -120,7 +120,7 @@ export default function HomePage() {
             href="/glossary"
             className="flex items-start gap-3 rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
           >
-            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-navy font-mono text-[11px] font-bold text-copper-tint" dir="ltr" aria-hidden="true">
+            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-navy font-mono text-[11px] font-bold text-blue-tint" dir="ltr" aria-hidden="true">
               {nextTerm.en.slice(0, 4)}
             </span>
             <div className="min-w-0 flex-1">
@@ -141,20 +141,20 @@ export default function HomePage() {
         <section aria-label="מה כבר למדת" className="mt-4">
           <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card)">
             <div className="flex flex-1 flex-col items-center border-e border-line-soft px-2">
-              <span className="text-[22px] font-extrabold text-copper-deep">
+              <span className="text-[22px] font-extrabold text-blue-deep">
                 {completedCount}
               </span>
               <span className="text-[12px] font-semibold text-ink-soft">שיעורים</span>
             </div>
             <div className="flex flex-1 flex-col items-center border-e border-line-soft px-2">
-              <span className="text-[22px] font-extrabold text-copper-deep">
+              <span className="text-[22px] font-extrabold text-blue-deep">
                 {progress.learnedTerms.length}
               </span>
               <span className="text-[12px] font-semibold text-ink-soft">מושגים</span>
             </div>
             <Link href="/review" className="flex flex-1 flex-col items-center px-2">
               <span className="text-[22px]">🔁</span>
-              <span className="text-[12px] font-semibold text-copper-deep">לחזרה</span>
+              <span className="text-[12px] font-semibold text-blue-deep">לחזרה</span>
             </Link>
           </div>
         </section>
@@ -167,7 +167,7 @@ export default function HomePage() {
       <section aria-label="מסלול הלמידה" className="mt-8">
         <div className="mb-3 flex items-baseline justify-between">
           <h2 className="text-[20px] font-bold">מסלול הלמידה</h2>
-          <Link href="/modules" className="text-[13px] font-semibold text-copper-deep">
+          <Link href="/modules" className="text-[13px] font-semibold text-blue-deep">
             לכל המודולים
           </Link>
         </div>

@@ -58,7 +58,7 @@ export default function ModuleCard({
           className={`flex h-14 w-14 items-center justify-center rounded-lg font-mono text-[11px] font-bold tracking-wider ${
             locked
               ? "bg-surface-sunken text-ink-faint"
-              : "bg-navy text-copper-tint shadow-(--shadow-chip)"
+              : "bg-navy text-blue-tint shadow-(--shadow-chip)"
           }`}
           dir="ltr"
         >
@@ -76,7 +76,7 @@ export default function ModuleCard({
               status === "completed"
                 ? "bg-good-tint text-good"
                 : status === "in-progress"
-                  ? "bg-copper-tint text-copper-deep"
+                  ? "bg-blue-tint text-blue-deep"
                   : status === "new"
                     ? "bg-surface-sunken text-ink-soft"
                     : "bg-transparent text-ink-faint"

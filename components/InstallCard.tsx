@@ -98,7 +98,7 @@ export default function InstallCard() {
         {promptEvent ? (
           <button
             onClick={handleInstall}
-            className="shrink-0 rounded-xl bg-copper px-3.5 py-2 text-[13.5px] font-bold text-white transition-transform active:scale-[0.98]"
+            className="shrink-0 rounded-xl bg-blue px-3.5 py-2 text-[13.5px] font-bold text-white transition-transform active:scale-[0.98]"
           >
             התקן
           </button>

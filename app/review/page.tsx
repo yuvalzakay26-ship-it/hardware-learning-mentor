@@ -58,7 +58,7 @@ export default function ReviewPage() {
           </p>
           <Link
             href="/modules"
-            className="mt-4 inline-block rounded-2xl bg-copper px-5 py-3 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
+            className="mt-4 inline-block rounded-2xl bg-blue px-5 py-3 text-[15px] font-bold text-white transition-transform active:scale-[0.98]"
           >
             למסלול הלמידה
           </Link>
@@ -78,18 +78,18 @@ export default function ReviewPage() {
               <Link
                 key={`${moduleId}:${section.id}`}
                 href={`/lesson/${moduleId}`}
-                className="flex items-center gap-3 rounded-2xl border border-copper/25 bg-copper-tint/40 p-3.5 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
+                className="flex items-center gap-3 rounded-2xl border border-blue/25 bg-blue-tint/40 p-3.5 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
               >
                 <span className="text-[18px]" aria-hidden="true">🤔</span>
                 <div className="min-w-0 flex-1">
-                  <div className="text-[11px] font-semibold text-copper-deep">
+                  <div className="text-[11px] font-semibold text-blue-deep">
                     {module.title}
                   </div>
                   <div className="truncate text-[15px] font-bold text-ink">
                     {section.title}
                   </div>
                 </div>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5 shrink-0 text-copper" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5 shrink-0 text-blue" aria-hidden="true">
                   <path d="m14 6-6 6 6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
@@ -110,7 +110,7 @@ export default function ReviewPage() {
             className="mt-8"
           >
             <div className="mb-3 flex items-center gap-2">
-              <span className="rounded-lg bg-navy px-2 py-1 font-mono text-[11px] font-bold text-copper-tint" dir="ltr">
+              <span className="rounded-lg bg-navy px-2 py-1 font-mono text-[11px] font-bold text-blue-tint" dir="ltr">
                 {module.chipLabel}
               </span>
               <h2 className="text-[19px] font-bold">{module.title}</h2>
@@ -142,7 +142,7 @@ export default function ReviewPage() {
                     <Link
                       key={t.id}
                       href="/glossary"
-                      className="rounded-full border border-line bg-bg px-2.5 py-1 font-mono text-[12px] font-semibold text-copper-deep transition-colors active:bg-line"
+                      className="rounded-full border border-line bg-bg px-2.5 py-1 font-mono text-[12px] font-semibold text-blue-deep transition-colors active:bg-line"
                       dir="ltr"
                     >
                       {t.en}
@@ -165,11 +165,11 @@ export default function ReviewPage() {
                       className="group rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card)"
                     >
                       <summary className="cursor-pointer list-none text-[15px] font-semibold leading-relaxed marker:hidden">
-                        <span className="me-2 font-mono text-[13px] font-bold text-copper" dir="ltr">
+                        <span className="me-2 font-mono text-[13px] font-bold text-blue" dir="ltr">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         {item.q}
-                        <span className="mt-1.5 block text-[12px] font-medium text-copper-deep group-open:hidden">
+                        <span className="mt-1.5 block text-[12px] font-medium text-blue-deep group-open:hidden">
                           לחץ לחשיפת התשובה
                         </span>
                       </summary>

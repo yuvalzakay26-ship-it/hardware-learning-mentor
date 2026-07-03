@@ -13,13 +13,13 @@ function Box({
 }: {
   label: string;
   sub?: string;
-  tone?: "light" | "dark" | "copper";
+  tone?: "light" | "dark" | "blue";
   className?: string;
 }) {
   const tones = {
     light: "border-line bg-bg text-ink",
     dark: "border-navy-deep bg-navy text-white",
-    copper: "border-copper/40 bg-copper-tint text-copper-deep",
+    blue: "border-blue/40 bg-blue-tint text-blue-deep",
   } as const;
   return (
     <div
@@ -34,13 +34,13 @@ function Box({
 function Wire({ label }: { label?: string }) {
   return (
     <div className="flex flex-col items-center py-0.5" aria-hidden="true">
-      <span className="h-4 w-0.5 bg-copper/70" />
+      <span className="h-4 w-0.5 bg-blue/70" />
       {label && (
-        <span className="rounded-full border border-copper/30 bg-copper-tint px-2 py-0.5 font-mono text-[10px] font-bold text-copper-deep" dir="ltr">
+        <span className="rounded-full border border-blue/30 bg-blue-tint px-2 py-0.5 font-mono text-[10px] font-bold text-blue-deep" dir="ltr">
           {label}
         </span>
       )}
-      {label && <span className="h-4 w-0.5 bg-copper/70" />}
+      {label && <span className="h-4 w-0.5 bg-blue/70" />}
     </div>
   );
 }
@@ -52,7 +52,7 @@ function CpuInside() {
         מבט אל תוך המעבד (בפישוט)
       </figcaption>
       <div className="rounded-xl border-2 border-navy bg-navy p-3">
-        <div className="mb-2 text-center font-mono text-[11px] font-bold tracking-widest text-copper-tint" dir="ltr">
+        <div className="mb-2 text-center font-mono text-[11px] font-bold tracking-widest text-blue-tint" dir="ltr">
           CPU
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -61,24 +61,24 @@ function CpuInside() {
               <div className="text-[12px] font-bold text-white">ליבה {n}</div>
               <div className="mt-0.5 text-[10px] text-white/60">2 ת׳רדים</div>
               <div className="mt-1.5 flex justify-center gap-1" dir="ltr">
-                <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-copper-tint">
+                <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-blue-tint">
                   L1
                 </span>
-                <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-copper-tint">
+                <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-blue-tint">
                   L2
                 </span>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-2 rounded-lg bg-copper/90 py-1.5 text-center">
+        <div className="mt-2 rounded-lg bg-blue/90 py-1.5 text-center">
           <span className="text-[11px] font-bold text-white">
             מטמון L3 משותף לכל הליבות
           </span>
         </div>
         <div className="mt-2 flex items-center justify-center gap-1.5 rounded-lg border border-white/15 py-1">
           <span className="text-[10px] text-white/70">⏱ שעון פנימי —</span>
-          <span className="font-mono text-[10px] font-bold text-copper-tint" dir="ltr">
+          <span className="font-mono text-[10px] font-bold text-blue-tint" dir="ltr">
             3.5GHz
           </span>
           <span className="text-[10px] text-white/70">= 3.5 מיליארד פעימות בשנייה</span>
@@ -104,7 +104,7 @@ function CpuPch() {
       <div className="grid grid-cols-3 gap-2" aria-hidden="true">
         {[0, 1, 2].map((i) => (
           <div key={i} className="flex justify-center">
-            <span className="h-4 w-0.5 bg-copper/70" />
+            <span className="h-4 w-0.5 bg-blue/70" />
           </div>
         ))}
       </div>
@@ -118,14 +118,14 @@ function CpuPch() {
       <Box
         label="PCH — רכזת בקרת הפלטפורמה"
         sub="צומת התקשורת של כל השאר"
-        tone="copper"
+        tone="blue"
         className="py-2.5"
       />
 
       <div className="grid grid-cols-3 gap-2 pt-1" aria-hidden="true">
         {[0, 1, 2].map((i) => (
           <div key={i} className="flex justify-center">
-            <span className="h-4 w-0.5 bg-copper/70" />
+            <span className="h-4 w-0.5 bg-blue/70" />
           </div>
         ))}
       </div>

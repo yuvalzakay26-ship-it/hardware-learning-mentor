@@ -41,8 +41,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   // בהיר בזמן גלילה למעלה, כהה כשהאפליקציה במצב standalone.
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f5f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#16263f" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f9fc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f2544" },
   ],
 };
 

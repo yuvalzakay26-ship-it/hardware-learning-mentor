@@ -28,7 +28,7 @@ export default function TermCard({
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-[15px] font-bold text-copper-deep" dir="ltr">
+            <span className="font-mono text-[15px] font-bold text-blue-deep" dir="ltr">
               {term.en}
             </span>
             <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-[10.5px] font-semibold text-ink-faint">
@@ -63,10 +63,10 @@ export default function TermCard({
       )}
 
       {term.workplace && (
-        <div className="mt-2 flex gap-2 rounded-xl border-s-[3px] border-copper/50 bg-copper-tint/40 p-2.5">
+        <div className="mt-2 flex gap-2 rounded-xl border-s-[3px] border-blue/50 bg-blue-tint/40 p-2.5">
           <span className="mt-0.5 shrink-0 text-[13px]" aria-hidden="true">🛠️</span>
           <p className="text-[13.5px] leading-relaxed text-ink-soft">
-            <span className="font-semibold text-copper-deep">איפה פוגשים את זה בעבודה? </span>
+            <span className="font-semibold text-blue-deep">איפה פוגשים את זה בעבודה? </span>
             {term.workplace}
           </p>
         </div>
