@@ -7,7 +7,8 @@ export type DiagramKind =
   | "boot-flow"
   | "post-flow"
   | "target-devices"
-  | "typec-flow";
+  | "typec-flow"
+  | "debug-flow";
 
 export type Block =
   | { type: "p"; text: string }

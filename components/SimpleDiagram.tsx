@@ -319,6 +319,33 @@ function TypecFlow() {
   );
 }
 
+function DebugFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "תקלה", sub: "Failure — משהו לא עובד כמצופה", tone: "dark" },
+    { label: "רמזים בסיסיים", sub: "Basic Clues — מה רואים בכלים הרגילים", tone: "light" },
+    { label: "POST / BIOS / לוגים", sub: "המקורות הראשונים לראיות", tone: "blue" },
+    { label: "חיבור Debug", sub: "Debug Connection — כשצריך להעמיק", tone: "dark" },
+    { label: "ראיות עמוקות יותר", sub: "Deeper Evidence — מצב הפלטפורמה מבפנים", tone: "blue" },
+    { label: "דיווח / צעד הבא", sub: "Report — מסכמים ומחליטים איך ממשיכים", tone: "light" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מהתקלה ועד לראיות: מתי חיבור Debug נכנס לתמונה
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        לא קופצים ישר ל-Debug — קודם מנצלים את הרמזים הרגילים, ורק כשצריך מעמיקים.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
@@ -326,5 +353,6 @@ export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "post-flow") return <PostFlow />;
   if (kind === "target-devices") return <TargetDevices />;
   if (kind === "typec-flow") return <TypecFlow />;
+  if (kind === "debug-flow") return <DebugFlow />;
   return <HostSutSsh />;
 }
