@@ -37,6 +37,8 @@ export type TermCategory =
   | "memory" // זיכרון
   | "io" // תקשורת
   | "firmware" // קושחה / BIOS
+  | "environment" // סביבת בדיקה (Host, SUT, Frame, Target)
+  | "debug" // חיבורי Debug ושליטה מרחוק
   | "validation"; // ולידציה
 
 export interface GlossaryTerm {
