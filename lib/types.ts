@@ -8,7 +8,8 @@ export type DiagramKind =
   | "post-flow"
   | "target-devices"
   | "typec-flow"
-  | "debug-flow";
+  | "debug-flow"
+  | "env-flow";
 
 export type Block =
   | { type: "p"; text: string }
@@ -18,7 +19,8 @@ export type Block =
   | { type: "mistakes"; items: string[] } // טעויות נפוצות בהבנה
   | { type: "tip"; title?: string; text: string }
   | { type: "diagram"; kind: DiagramKind }
-  | { type: "questions"; items: { q: string; a: string }[] };
+  | { type: "questions"; items: { q: string; a: string }[] }
+  | { type: "table"; caption?: string; head: string[]; rows: string[][] };
 
 export interface LessonSection {
   id: string;

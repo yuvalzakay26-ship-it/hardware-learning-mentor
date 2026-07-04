@@ -92,6 +92,50 @@ function BlockView({ block }: { block: Block }) {
     case "diagram":
       return <SimpleDiagram kind={block.kind} />;
 
+    case "table":
+      return (
+        <figure>
+          {block.caption && (
+            <figcaption className="mb-2 text-[13px] font-semibold text-ink-soft">
+              {block.caption}
+            </figcaption>
+          )}
+          <div className="-mx-1 overflow-x-auto rounded-xl border border-line">
+            <table className="w-full min-w-[520px] border-collapse text-right">
+              <thead>
+                <tr className="bg-blue-tint/70">
+                  {block.head.map((cell, i) => (
+                    <th
+                      key={i}
+                      scope="col"
+                      className="border-b border-line px-3 py-2.5 text-[13px] font-bold text-blue-deep align-top"
+                    >
+                      {cell}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {block.rows.map((row, r) => (
+                  <tr key={r} className={r % 2 === 1 ? "bg-bg" : "bg-surface"}>
+                    {row.map((cell, c) => (
+                      <td
+                        key={c}
+                        className={`border-b border-line px-3 py-2.5 text-[13.5px] leading-relaxed align-top ${
+                          c === 0 ? "font-semibold text-ink" : "text-ink-soft"
+                        }`}
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </figure>
+      );
+
     case "questions":
       return (
         <div className="space-y-3">

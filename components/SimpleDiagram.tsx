@@ -346,6 +346,33 @@ function DebugFlow() {
   );
 }
 
+function EnvFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "החומרה / ה-Target", sub: "Hardware — הלוח או המערכת שבודקים", tone: "dark" },
+    { label: "הדלקה / BIOS", sub: "Boot / BIOS — המערכת מתעוררת ומאתחלת", tone: "light" },
+    { label: "סביבת ולידציה", sub: "Validation Environment — התוכנה שבתוכה בודקים", tone: "blue" },
+    { label: "OSBV או SVOS", sub: "שתי סביבות אפשריות — לפי מה שהבדיקה דורשת", tone: "dark" },
+    { label: "כלים / לוגים / בדיקות", sub: "Tools / Logs / Tests — מה שרץ בפועל", tone: "light" },
+    { label: "דוח / ראיות", sub: "Report / Evidence — מה שמתעדים ומדווחים", tone: "blue" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מהחומרה ועד הדוח: איפה סביבת הבדיקה נכנסת לתמונה
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תקלה שקורית לפני שלב 'סביבת הבדיקה' שייכת להדלקה/BIOS — לא לסביבה עצמה.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
@@ -354,5 +381,6 @@ export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "target-devices") return <TargetDevices />;
   if (kind === "typec-flow") return <TypecFlow />;
   if (kind === "debug-flow") return <DebugFlow />;
+  if (kind === "env-flow") return <EnvFlow />;
   return <HostSutSsh />;
 }
