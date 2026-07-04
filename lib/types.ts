@@ -20,6 +20,7 @@ export type Block =
   | { type: "mistakes"; items: string[] } // טעויות נפוצות בהבנה
   | { type: "tip"; title?: string; text: string }
   | { type: "diagram"; kind: DiagramKind }
+  | { type: "image"; visualId: string } // תמונה אמיתית מתוך lib/visuals.ts
   | { type: "questions"; items: { q: string; a: string }[] }
   | { type: "table"; caption?: string; head: string[]; rows: string[][] };
 

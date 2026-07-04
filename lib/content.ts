@@ -24,6 +24,10 @@ const cpuOverview: Module = {
           text: "לפני הכול, בלי לחץ: עד סוף השיעור הזה תדע להסביר לבד מה זה מעבד. נתחיל מהשם עצמו.",
         },
         {
+          type: "image",
+          visualId: "cpu-processor",
+        },
+        {
           type: "term",
           term: "CPU",
           hebrew: "מעבד — יחידת העיבוד המרכזית",
@@ -418,6 +422,10 @@ const cpuPch: Module = {
         {
           type: "p",
           text: "אם המעבד הוא המוח, ה-PCH הוא מרכז העצבים שמעביר הודעות בין המוח לשאר הגוף. בלעדיו — למעבד לא הייתה דרך נוחה לדבר עם העכבר, הדיסק או ה-USB.",
+        },
+        {
+          type: "image",
+          visualId: "motherboard-pch-chipset",
         },
       ],
     },
@@ -1818,6 +1826,10 @@ const postCodePort80: Module = {
           ],
         },
         {
+          type: "image",
+          visualId: "post-code-debug-card",
+        },
+        {
           type: "tip",
           title: "אל תיבהל מהשם",
           text: "'Port 80' נשמע טכני, אבל בשבילך זו בעיקר כתובת מוכרת שאומרת 'כאן מופיעים קודי ההדלקה'. בהמשך, בשיעורי ה-Debug המתקדמים, נראה עוד דרכים לחשוף מידע מוקדם כזה.",
@@ -2191,6 +2203,10 @@ const targetDevices: Module = {
           text: "עד עכשיו דיברנו על ההתקנים עצמם. אבל איפה הם מתחברים? כאן נכנסים שני מונחים שקל להתבלבל ביניהם — נסדר אותם ברוגע.",
         },
         {
+          type: "image",
+          visualId: "motherboard",
+        },
+        {
           type: "term",
           term: "Connector",
           hebrew: "מחבר — המקום הפיזי שאליו מחברים",
@@ -2231,6 +2247,10 @@ const targetDevices: Module = {
           hebrew: "חריץ פנימי קטן לכרטיסים דקים",
           explanation:
             "מחבר / חריץ קטן ומאורך על לוח האם, שאליו מכניסים כרטיס דק ישירות על הלוח — בלי כבלים. הכי נפוץ: כונני אחסון מהירים מסוג SSD.",
+        },
+        {
+          type: "image",
+          visualId: "m2-ssd",
         },
         {
           type: "term",
@@ -2274,6 +2294,10 @@ const targetDevices: Module = {
           hebrew: "צורת מחבר USB מודרנית",
           explanation:
             "צורת המחבר החדשה של USB — קטן, דק וסימטרי (מתחבר בכל כיוון, אין 'צד נכון'). השם המלא: USB Type-C.",
+        },
+        {
+          type: "image",
+          visualId: "usb-type-c-port",
         },
         {
           type: "p",
@@ -3857,6 +3881,10 @@ const thermalBasics: Module = {
           text: "רעיון פשוט לפתיחה: כשחומרה עובדת, היא מתחממת. זה טבעי לחלוטין — בדיוק כמו שגוף מתחמם אחרי ריצה. אבל בעבודת בדיקה, חום הוא לא רק 'חם או קר'.",
         },
         {
+          type: "image",
+          visualId: "fan-heatsink",
+        },
+        {
           type: "bullets",
           items: [
             "חום יכול להשפיע על הביצועים — המערכת יכולה להאט.",
@@ -4032,11 +4060,19 @@ const thermalBasics: Module = {
             "מאוורר מסובב להבים ומזיז אוויר כדי לפנות חום מהמערכת. כשחם יותר, הוא בדרך כלל מסתובב מהר יותר.",
         },
         {
+          type: "image",
+          visualId: "fan",
+        },
+        {
           type: "term",
           term: "Heat Sink",
           hebrew: "גוף קירור — חלק מתכת שמפנה חום מהשבב",
           explanation:
             "חלק מתכת (לרוב עם צלעות) שמוצמד לשבב ומעביר את החום הרחק ממנו אל האוויר. בדרך כלל עובד יחד עם מאוורר.",
+        },
+        {
+          type: "image",
+          visualId: "heatsink",
         },
         {
           type: "term",

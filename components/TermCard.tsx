@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import type { GlossaryTerm } from "@/lib/types";
 import { categoryLabels, getTerm } from "@/lib/glossary";
+import { getVisualByTerm } from "@/lib/visuals";
 
 /** כרטיס מושג עשיר: הסבר פשוט, דוגמה, איפה פוגשים בעבודה, ומונחים קשורים */
 export default function TermCard({
@@ -18,6 +20,8 @@ export default function TermCard({
   const related = (term.related ?? [])
     .map((id) => getTerm(id))
     .filter((t): t is GlossaryTerm => Boolean(t));
+
+  const visual = getVisualByTerm(term.id);
 
   return (
     <div
@@ -54,6 +58,34 @@ export default function TermCard({
       <p className="mt-2 text-[14.5px] leading-relaxed text-ink-soft">
         {term.explanation}
       </p>
+
+      {visual && (
+        <figure className="mt-3 overflow-hidden rounded-xl border border-line bg-surface-sunken">
+          <Image
+            src={visual.src}
+            alt={visual.alt}
+            width={visual.width}
+            height={visual.height}
+            sizes="(max-width: 512px) 100vw, 512px"
+            loading="lazy"
+            className="max-h-52 w-full object-contain"
+          />
+          <figcaption className="px-2.5 py-1.5 text-[10.5px] leading-snug text-ink-faint">
+            <a
+              href={visual.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2"
+            >
+              {visual.sourceName}
+            </a>
+            {" · "}
+            <span dir="ltr">{visual.attribution}</span>
+            {" · "}
+            <span dir="ltr">{visual.license}</span>
+          </figcaption>
+        </figure>
+      )}
 
       {term.example && (
         <p className="mt-2.5 rounded-xl bg-surface-sunken p-2.5 text-[13.5px] leading-relaxed text-ink-soft">

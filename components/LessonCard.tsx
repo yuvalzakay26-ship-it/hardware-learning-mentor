@@ -1,5 +1,7 @@
 import type { Block, LessonSection } from "@/lib/types";
 import SimpleDiagram from "./SimpleDiagram";
+import LearningImage from "./LearningImage";
+import { getVisual } from "@/lib/visuals";
 
 function BlockView({ block }: { block: Block }) {
   switch (block.type) {
@@ -91,6 +93,12 @@ function BlockView({ block }: { block: Block }) {
 
     case "diagram":
       return <SimpleDiagram kind={block.kind} />;
+
+    case "image": {
+      const visual = getVisual(block.visualId);
+      if (!visual) return null;
+      return <LearningImage visual={visual} />;
+    }
 
     case "table":
       return (
