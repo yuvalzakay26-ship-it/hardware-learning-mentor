@@ -12,18 +12,7 @@ import {
   setConfidence,
 } from "@/lib/storage";
 
-// קישור לשיעור סמוך במסלול (קודם / הבא). null = אין שיעור כזה.
-export type LessonLink = { id: string; title: string } | null;
-
-export default function LessonView({
-  module,
-  prev,
-  next,
-}: {
-  module: Module;
-  prev: LessonLink;
-  next: LessonLink;
-}) {
+export default function LessonView({ module }: { module: Module }) {
   const total = module.sections.length;
   const [index, setIndex] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -139,44 +128,34 @@ export default function LessonView({
         </div>
       </header>
 
-      {/* ניווט עליון במסלול: שיעור קודם · לתחילת השיעור · שיעור הבא */}
+      {/* ניווט עליון מהיר בין כרטיסי השיעור: כרטיס קודם · התחלה · כרטיס הבא */}
       <nav
-        aria-label="ניווט בין שיעורים"
+        aria-label="ניווט בין כרטיסי השיעור"
         className="mt-3.5 flex items-stretch gap-1 rounded-2xl border border-line bg-surface p-1"
       >
-        {/* שיעור קודם — ב-RTL נמצא בצד ימין (תחילת הקריאה) */}
-        {prev ? (
-          <Link
-            href={`/lesson/${prev.id}`}
-            aria-label={`שיעור קודם: ${prev.title}`}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-blue-deep transition-colors active:bg-blue-tint"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
-              <path d="m10 6 6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            קודם
-          </Link>
-        ) : (
-          <span
-            aria-disabled="true"
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-ink-faint opacity-40"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
-              <path d="m10 6 6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            קודם
-          </span>
-        )}
+        {/* כרטיס קודם — ב-RTL נמצא בצד ימין (תחילת הקריאה) */}
+        <button
+          type="button"
+          onClick={() => goTo(index - 1)}
+          disabled={index === 0}
+          aria-label="לכרטיס הקודם בשיעור"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-blue-deep transition-colors active:bg-blue-tint disabled:text-ink-faint disabled:opacity-40 disabled:active:bg-transparent"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
+            <path d="m10 6 6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          קודם
+        </button>
 
         <span className="my-1 w-px shrink-0 bg-line" aria-hidden="true" />
 
-        {/* לתחילת השיעור — מחזיר לכרטיס הראשון בלי למחוק התקדמות */}
+        {/* התחלה — מחזיר לכרטיס הראשון בשיעור, בלי למחוק שום התקדמות */}
         <button
           type="button"
           onClick={goToStart}
           disabled={index === 0}
-          aria-label="חזרה לכרטיס הראשון בשיעור"
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-ink-soft transition-colors active:bg-line disabled:opacity-40"
+          aria-label="לתחילת השיעור — לכרטיס הראשון"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-ink-soft transition-colors active:bg-line disabled:text-ink-faint disabled:opacity-40 disabled:active:bg-transparent"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
             <path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -186,29 +165,19 @@ export default function LessonView({
 
         <span className="my-1 w-px shrink-0 bg-line" aria-hidden="true" />
 
-        {/* שיעור הבא — ב-RTL נמצא בצד שמאל */}
-        {next ? (
-          <Link
-            href={`/lesson/${next.id}`}
-            aria-label={`שיעור הבא: ${next.title}`}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-blue-deep transition-colors active:bg-blue-tint"
-          >
-            הבא
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
-              <path d="m14 6-6 6 6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
-        ) : (
-          <span
-            aria-disabled="true"
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-ink-faint opacity-40"
-          >
-            הבא
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
-              <path d="m14 6-6 6 6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-        )}
+        {/* כרטיס הבא — ב-RTL נמצא בצד שמאל */}
+        <button
+          type="button"
+          onClick={() => goTo(index + 1)}
+          disabled={isLast}
+          aria-label="לכרטיס הבא בשיעור"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[13px] font-semibold text-blue-deep transition-colors active:bg-blue-tint disabled:text-ink-faint disabled:opacity-40 disabled:active:bg-transparent"
+        >
+          הבא
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
+            <path d="m14 6-6 6 6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </nav>
 
       {/* כרטיס הלימוד הנוכחי */}
