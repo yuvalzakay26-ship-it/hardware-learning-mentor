@@ -56,6 +56,22 @@ export function markSectionReached(lessonId: string, index: number): Progress {
   return next;
 }
 
+/**
+ * מחזיר את מיקום הקריאה בשיעור לכרטיס הראשון (אינדקס 0), בלי לפגוע בשום
+ * התקדמות אחרת: שיעורים שהושלמו, תחושת הביטחון והמושגים שנלמדו נשארים כמו שהם.
+ * משמש לכפתור «לתחילת השיעור».
+ */
+export function resetSectionToStart(lessonId: string): Progress {
+  const p = loadProgress();
+  const next: Progress = {
+    ...p,
+    sectionReached: { ...p.sectionReached, [lessonId]: 0 },
+    lastLessonId: lessonId,
+  };
+  saveProgress(next);
+  return next;
+}
+
 export function markLessonCompleted(lessonId: string): Progress {
   const p = loadProgress();
   const next: Progress = {
