@@ -17,6 +17,12 @@ export default function ProgressPage() {
   const clearCards = confValues.filter((v) => v === "got").length;
   const reviewCards = confValues.filter((v) => v === "unsure").length;
 
+  // מספר ההערות האישיות בכל המחברת — לקישור עדין אל «חזרה»
+  const notesCount = Object.values(progress.personalNotes).reduce(
+    (sum, lesson) => sum + Object.keys(lesson).length,
+    0
+  );
+
   // הצעד הבא: השיעור הזמין הראשון שטרם הושלם — או ריענון עדין אם סיימת הכול
   const nextLesson = availableModules.find(
     (m) => !progress.completedLessons.includes(m.id)
@@ -55,6 +61,25 @@ export default function ProgressPage() {
           sub="מחכים לך באזור «חזרה»"
         />
       </section>
+
+      {/* המחברת שלי — קישור עדין, מופיע רק כשיש הערות */}
+      {ready && notesCount > 0 && (
+        <Link
+          href="/review"
+          className="mt-6 flex items-center gap-3 rounded-2xl border border-line bg-surface p-4 shadow-(--shadow-card) transition-transform active:scale-[0.985]"
+        >
+          <span className="text-[22px]" aria-hidden="true">📔</span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[15.5px] font-bold">המחברת שלי</div>
+            <p className="text-[12.5px] text-ink-soft">
+              {notesCount} הערות אישיות · פתח באזור «חזרה»
+            </p>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5 shrink-0 text-blue" aria-hidden="true">
+            <path d="m14 6-6 6 6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+      )}
 
       {/* הצעד הבא */}
       <section aria-label="הצעד הבא" className="mt-6">

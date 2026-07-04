@@ -67,6 +67,13 @@ export interface GlossaryTerm {
 // רמת ביטחון של הלומד בכרטיס לימוד — ללא ציון, רק תחושה אישית
 export type Confidence = "got" | "unsure";
 
+// סיבה אופציונלית לכך שכרטיס לא הובן עד הסוף — עוזרת למקד את החזרה
+export type UnclearReason =
+  | "example" // צריך דוגמה
+  | "ask-at-work" // צריך לשאול בעבודה
+  | "unclear-term" // מושג לא ברור
+  | "review-again"; // צריך לחזור על זה שוב
+
 export interface Progress {
   completedLessons: string[];
   // עד איזה חלק בשיעור הגיע המשתמש (אינדקס הכרטיס האחרון שנצפה)
@@ -75,4 +82,8 @@ export interface Progress {
   confidence: Record<string, Confidence>;
   learnedTerms: string[];
   lastLessonId: string | null;
+  // המחברת האישית: הערה חופשית לכל כרטיס — personalNotes[moduleId][sectionId] = טקסט
+  personalNotes: Record<string, Record<string, string>>;
+  // סיבה אופציונלית ל"לא הבנתי עד הסוף": מפתח "moduleId:sectionId" → סיבה
+  unclearReasons: Record<string, UnclearReason>;
 }

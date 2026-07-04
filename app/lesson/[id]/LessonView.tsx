@@ -3,13 +3,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import LessonCard from "@/components/LessonCard";
-import type { Confidence, Module } from "@/lib/types";
+import PersonalNote from "@/components/PersonalNote";
+import type { Confidence, Module, UnclearReason } from "@/lib/types";
+import { UNCLEAR_REASONS } from "@/lib/notes";
 import {
   loadProgress,
   markLessonCompleted,
   markSectionReached,
   resetSectionToStart,
   setConfidence,
+  setUnclearReason,
 } from "@/lib/storage";
 
 export default function LessonView({ module }: { module: Module }) {
@@ -18,13 +21,25 @@ export default function LessonView({ module }: { module: Module }) {
   const [finished, setFinished] = useState(false);
   const [ready, setReady] = useState(false);
   const [confidence, setConf] = useState<Record<string, Confidence>>({});
+  const [reasons, setReasons] = useState<Record<string, UnclearReason>>({});
 
-  // חוזרים לנקודה שבה עצרנו בפעם הקודמת
+  // חוזרים לנקודה שבה עצרנו — אלא אם הגענו עם ?card=N (פתיחה ישירה של כרטיס
+  // מתוך אזור החזרה), ואז נפתח בדיוק את הכרטיס המבוקש.
   useEffect(() => {
     const p = loadProgress();
     const reached = p.sectionReached[module.id] ?? 0;
-    setIndex(Math.min(reached, total - 1));
+    let start = Math.min(reached, total - 1);
+    const params = new URLSearchParams(window.location.search);
+    const cardParam = params.get("card");
+    if (cardParam !== null) {
+      const requested = Number.parseInt(cardParam, 10);
+      if (Number.isFinite(requested) && requested >= 0 && requested < total) {
+        start = requested;
+      }
+    }
+    setIndex(start);
     setConf(p.confidence);
+    setReasons(p.unclearReasons);
     setReady(true);
   }, [module.id, total]);
 
@@ -84,10 +99,17 @@ export default function LessonView({ module }: { module: Module }) {
   const isLast = index === total - 1;
   const confKey = `${module.id}:${section.id}`;
   const currentConf = confidence[confKey];
+  const currentReason = reasons[confKey];
 
   function pickConfidence(value: Confidence) {
     const next = setConfidence(module.id, section.id, value);
     setConf(next.confidence);
+    setReasons(next.unclearReasons);
+  }
+
+  function pickReason(reason: UnclearReason) {
+    const next = setUnclearReason(module.id, section.id, reason);
+    setReasons(next.unclearReasons);
   }
 
   return (
@@ -216,11 +238,39 @@ export default function LessonView({ module }: { module: Module }) {
             </button>
           </div>
           {currentConf === "unsure" && (
-            <p className="mt-2.5 text-center text-[12.5px] leading-relaxed text-ink-faint">
-              זה בסדר גמור. סימנו לך את הכרטיס — הוא יחכה לך באזור «חזרה».
-            </p>
+            <div className="mt-3 border-t border-line pt-3">
+              <p className="text-center text-[12.5px] leading-relaxed text-ink-faint">
+                זה בסדר גמור. סימנו לך את הכרטיס — הוא יחכה לך באזור «חזרה».
+              </p>
+              <p className="mt-2.5 text-center text-[12.5px] font-semibold text-ink-soft">
+                רוצה להוסיף למה? (לא חובה)
+              </p>
+              <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+                {UNCLEAR_REASONS.map((r) => {
+                  const active = currentReason === r.id;
+                  return (
+                    <button
+                      key={r.id}
+                      type="button"
+                      onClick={() => pickReason(r.id)}
+                      aria-pressed={active}
+                      className={`rounded-full border px-2.5 py-1.5 text-[12.5px] font-semibold transition-colors ${
+                        active
+                          ? "border-blue/40 bg-blue-tint text-blue-deep"
+                          : "border-line bg-bg text-ink-soft active:bg-line"
+                      }`}
+                    >
+                      {r.emoji} {r.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           )}
         </div>
+
+        {/* הערה אישית לכרטיס — נשמרת במחברת שלך, לא משפיעה על ההתקדמות */}
+        <PersonalNote moduleId={module.id} sectionId={section.id} />
       </div>
 
       {/* ניווט בין כרטיסים */}
