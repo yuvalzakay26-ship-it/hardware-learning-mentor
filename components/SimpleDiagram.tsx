@@ -373,6 +373,33 @@ function EnvFlow() {
   );
 }
 
+function ThermalFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "עומס עבודה", sub: "Workload — הפעילות/הבדיקה שמעסיקה את החומרה", tone: "dark" },
+    { label: "צריכת חשמל", sub: "Power — האנרגיה החשמלית שהרכיב משתמש בה", tone: "light" },
+    { label: "חום", sub: "Heat — חלק מהאנרגיה הופך לחום", tone: "blue" },
+    { label: "טמפרטורה", sub: "Temperature — כמה חם נעשה הרכיב", tone: "dark" },
+    { label: "קירור", sub: "Cooling — מאווררים, גוף קירור וזרימת אוויר מפנים חום", tone: "light" },
+    { label: "התנהגות / יציבות / Throttling", sub: "Behavior — איך המערכת מגיבה לחום", tone: "blue" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        השרשרת התרמית: מעומס עבודה ועד להתנהגות המערכת
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        יותר עבודה ← יותר חשמל ← יותר חום ← טמפרטורה גבוהה יותר. קירור טוב שומר על הטווח הבטוח.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
@@ -382,5 +409,6 @@ export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "typec-flow") return <TypecFlow />;
   if (kind === "debug-flow") return <DebugFlow />;
   if (kind === "env-flow") return <EnvFlow />;
+  if (kind === "thermal-flow") return <ThermalFlow />;
   return <HostSutSsh />;
 }

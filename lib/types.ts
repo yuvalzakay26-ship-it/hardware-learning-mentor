@@ -9,7 +9,8 @@ export type DiagramKind =
   | "target-devices"
   | "typec-flow"
   | "debug-flow"
-  | "env-flow";
+  | "env-flow"
+  | "thermal-flow";
 
 export type Block =
   | { type: "p"; text: string }
