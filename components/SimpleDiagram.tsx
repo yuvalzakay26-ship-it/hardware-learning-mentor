@@ -494,7 +494,102 @@ function PowerSplitterFlow() {
   );
 }
 
+function ThermalSensor() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        חיישן חום — קורא טמפרטורה מבפנים ומדווח אותה כמספר
+      </figcaption>
+
+      {/* הרכיב שמתחמם — למשל המעבד — עם חיישן קטן בתוכו */}
+      <div className="rounded-xl border-2 border-navy bg-navy p-3">
+        <div className="mb-2 text-center font-mono text-[11px] font-bold tracking-widest text-blue-tint" dir="ltr">
+          CPU / רכיב שמתחמם
+        </div>
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-[11px] text-white/70">בתוך השבב יושב</span>
+          <span className="rounded-md bg-blue/90 px-2 py-1 text-[11px] font-bold text-white">
+            🌡️ חיישן חום זעיר
+          </span>
+        </div>
+        <p className="mt-2 text-center text-[10px] leading-relaxed text-white/60">
+          החיישן קטן מאוד — לרוב טמון בתוך השבב עצמו ולא נראה לעין.
+        </p>
+      </div>
+
+      <Wire label="קריאת ערך" />
+
+      {/* הערך שמדווח */}
+      <Box
+        label="ערך טמפרטורה"
+        sub="Temperature Value — מספר במעלות, למשל 72°"
+        tone="blue"
+        className="py-2.5"
+      />
+
+      <Wire label="מוצג בכלי" />
+
+      {/* איפה רואים את זה */}
+      <div className="grid grid-cols-3 gap-2">
+        <Box label="CPU Package" sub="חיישן המעבד" />
+        <Box label="לוח / SSD" sub="חיישן אחר" />
+        <Box label="לוג תרמי" sub="רישום לאורך זמן" />
+      </div>
+
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תרשים מושגי בלבד. לכל חיישן יש שם משלו בכלים — טמפרטורת המעבד וטמפרטורת הלוח הן שני דברים שונים.
+      </p>
+    </figure>
+  );
+}
+
+function DebugConnector() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מחבר Debug על הלוח — נקודת החיבור שדרכה מציצים פנימה
+      </figcaption>
+
+      {/* הלוח עם מחבר Debug גנרי */}
+      <div className="rounded-xl border-2 border-dashed border-blue/50 bg-blue-tint/40 p-3">
+        <div className="mb-2 text-center text-[11px] font-bold text-blue-deep">
+          הלוח הנבדק (Target)
+        </div>
+        <div className="flex flex-col items-center gap-1.5">
+          <Box
+            label="מחבר Debug גנרי"
+            sub="שורת פינים ייעודית — המיקום והפינאאוט לפי תיעוד הלוח"
+            className="w-full py-2"
+          />
+          {/* ייצוג ויזואלי של פינים */}
+          <div className="flex gap-1" dir="ltr" aria-hidden="true">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span key={i} className="h-3 w-1.5 rounded-sm bg-blue/70" />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <Wire label="כבל Debug" />
+
+      {/* הגשש */}
+      <Box label="גשש Debug (Probe)" sub="כלי חומרה שמתרגם בין הלוח למחשב הבודק" tone="dark" className="py-2.5" />
+
+      <Wire label="USB" />
+
+      {/* מחשב הבודק */}
+      <Box label="מחשב הבודק (Host)" sub="שם אוספים ומנתחים את המידע" tone="blue" className="py-2.5" />
+
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תרשים מושגי גנרי בלבד — לא מחבר של פלטפורמה מסוימת. לאיזה מחבר מתחברים ובאיזה כבל — תמיד לפי תיעוד הלוח והדרכת המנטור, לא לפי ניחוש.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
+  if (kind === "thermal-sensor") return <ThermalSensor />;
+  if (kind === "debug-connector") return <DebugConnector />;
   if (kind === "power-splitter-flow") return <PowerSplitterFlow />;
   if (kind === "ttk-flow") return <TtkFlow />;
   if (kind === "cpu-inside") return <CpuInside />;

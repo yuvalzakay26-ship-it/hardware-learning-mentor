@@ -228,6 +228,64 @@ export const visuals: Visual[] = [
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0",
     attribution: "Edward Betts",
   },
+
+  // ── Batch 3 — רכיבי חומרה פיזיים שהוזכרו בתוכן אך חסרה להם תמונה ──
+  {
+    id: "ram-module",
+    topicId: "memory",
+    lessonId: "cpu-overview",
+    termId: "ram",
+    src: "/images/learning/ram-module.jpg",
+    width: 960,
+    height: 720,
+    alt: "שני מודולי זיכרון RAM מסוג DDR4 — פסים מלבניים ארוכים עם שבבים וגוף פיזור חום מתכתי ומגעי זהב בקצה התחתון",
+    caption: "מודול זיכרון RAM (DDR4) — הכרטיס הארוך שנכנס לחריץ הזיכרון על לוח האם.",
+    explanation:
+      "זהו 'מקל' זיכרון (RAM) אמיתי. תחת גוף פיזור החום המתכתי יושבים שבבי הזיכרון עצמם, ורצועת מגעי הזהב בקצה התחתון היא מה שנכנס לחריץ הזיכרון על הלוח. בהדלקה ה-BIOS מאתחל את הזיכרון הזה (Memory Training) עוד לפני שמערכת ההפעלה עולה — ולכן תקלת זיכרון יכולה לעצור את המערכת מוקדם מאוד. חשוב לזכור: ה-RAM מתרוקן בכל כיבוי, הוא שומר רק את מה שהמערכת עובדת עליו כרגע.",
+    sourceName: "Wikimedia Commons",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:2*8Go_DDR4_Corsair_-_2018-05-08.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+    attribution: "Bretwa",
+  },
+  {
+    id: "board-connector",
+    topicId: "board",
+    lessonId: "target-devices",
+    termId: "j5",
+    src: "/images/learning/board-connector.jpg",
+    width: 600,
+    height: 600,
+    alt: "מחבר פינים (Pin Header) גנרי על רקע לבן — שתי שורות של פינים מתכתיים זהובים על בסיס פלסטיק שחור",
+    caption:
+      "מחבר פינים (Pin Header) גנרי — סוג נפוץ של מחבר על לוחות. 'J5' הוא רק תווית של מחבר מסוים, ותפקידו המדויק תלוי בתיעוד הלוח.",
+    explanation:
+      "כך נראה מחבר פינים טיפוסי על לוח: שורות של פינים מתכתיים קטנים שאליהם מתחבר כבל או מחבר נגדי. זו תמונה גנרית להמחשה — לא מחבר J5 של לוח כלשהו שלנו. השם 'J5' הוא רק תווית (Reference Designator) שמהנדסים נותנים למחבר מסוים על לוח מסוים; מה בדיוק מחובר אליו ומה תפקידו משתנים מלוח ללוח, ואת התשובה מוצאים בתיעוד הלוח — לא מנחשים.",
+    sourceName: "Wikimedia Commons",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Header_-_2x8_(Male,_0.1%22)_(15351250457).jpg",
+    license: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0",
+    attribution: "SparkFun Electronics",
+  },
+  {
+    id: "usb-c-adapter",
+    topicId: "typec",
+    lessonId: "type-c-tcss",
+    termId: "adapter",
+    src: "/images/learning/usb-c-adapter.jpg",
+    width: 960,
+    height: 720,
+    alt: "מתאם USB Type-C — מחבר Type-C סגלגל בקצה אחד ושקע USB מלבני רגיל בקצה השני",
+    caption: "מתאם (Adapter) מ-USB Type-C ל-USB רגיל — ממיר בין שני סוגי חיבור.",
+    explanation:
+      "מתאם קטן שממיר סוג חיבור אחד לאחר: בקצה אחד תקע Type-C, ובקצה השני שקע USB מלבני רגיל. כך אפשר לחבר התקן USB ישן ליציאת Type-C חדשה. בבדיקות חשוב לזכור שהמתאם עצמו הוא עוד רכיב בשרשרת — לפעמים דווקא הוא מקור התקלה, ולכן מתעדים באיזה מתאם השתמשו כדי שאפשר יהיה לשחזר ולבודד.",
+    sourceName: "Wikimedia Commons",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:USB_OTG_Type-C_Adapter_-_A.jpg",
+    license: "CC0 (נחלת הכלל)",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0",
+    attribution: "Fructibus",
+  },
 ];
 
 const byId = new Map(visuals.map((v) => [v.id, v]));
@@ -240,6 +298,8 @@ const termAliases: Record<string, string> = {
   thermal: "fan-heatsink",
   cooling: "fan-heatsink",
   chipset: "motherboard-pch-chipset",
+  connector: "board-connector",
+  "ref-designator": "board-connector",
 };
 
 const byTerm = new Map<string, Visual>();

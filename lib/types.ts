@@ -13,7 +13,9 @@ export type DiagramKind =
   | "env-flow"
   | "thermal-flow"
   | "ttk-flow"
-  | "power-splitter-flow";
+  | "power-splitter-flow"
+  | "thermal-sensor"
+  | "debug-connector";
 
 export type Block =
   | { type: "p"; text: string }
