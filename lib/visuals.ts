@@ -190,6 +190,44 @@ export const visuals: Visual[] = [
     licenseUrl: "https://creativecommons.org/licenses/by/2.0",
     attribution: "Eric Chan",
   },
+
+  // ── Batch 2 — הרחבת כיסוי: רכיבים פיזיים שחסרו להם תמונה ──
+  {
+    id: "debug-probe",
+    topicId: "debug",
+    lessonId: "debug-connection",
+    termId: "debug-probe",
+    src: "/images/learning/debug-probe.jpg",
+    width: 960,
+    height: 1048,
+    alt: "גשש Debug מסוג SEGGER J-Link — קופסה לבנה קטנה עם יציאת USB בצד אחד ומחבר JTAG/SWD בצד השני",
+    caption: "גשש Debug אמיתי (SEGGER J-Link) — הכלי שמתחבר בין מחשב הבודק לנקודת ה-Debug בלוח.",
+    explanation:
+      "זהו גשש Debug — כלי חומרה קטן. בצד אחד יש יציאת USB שמתחברת למחשב הבודק, ובצד השני מחבר JTAG/SWD שמתחבר לנקודת ה-Debug על הלוח הנבדק. דרכו אוספים מידע עמוק על מה שקורה בפנים, גם כשהמערכת תקועה ואין תמונה על המסך. שים לב: לאיזה מחבר בלוח מחברים ובאיזה כבל — מוודאים תמיד מול תיעוד הלוח, לא מנחשים.",
+    sourceName: "Wikimedia Commons",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Segger_J-Link_EDU.jpg",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+    attribution: "SEGGER Microcontroller GmbH",
+  },
+  {
+    id: "dock-station",
+    topicId: "dock",
+    lessonId: "type-c-tcss",
+    termId: "dock",
+    src: "/images/learning/dock-station.jpg",
+    width: 960,
+    height: 1280,
+    alt: "תחנת עגינה (Dock) של מחשב נייד — מתקן שטוח עם מחבר עגינה מרכזי שאליו מניחים את המחשב",
+    caption: "תחנת עגינה (Dock) אמיתית — מרחיבה חיבור אחד להרבה יציאות בבת אחת.",
+    explanation:
+      "זו תחנת עגינה: מניחים עליה את המחשב הנייד, והוא מתחבר דרך מחבר עגינה אחד (המחבר המתכתי שבמרכז). מהצד השני של הדוק יוצאות הרבה יציאות — מסך, USB, רשת וטעינה — כך שחיבור אחד הופך לרבים. בעבודה זה נוח, אבל הדוק הוא עוד רכיב שיכול להיות מקור לתקלה: לכן כשבודקים דרכו, מתעדים את דגם הדוק כדי לדעת אם התקלה בו ולא בהתקן או ביציאה.",
+    sourceName: "Wikimedia Commons",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Docking_station_1.jpg",
+    license: "CC0 (נחלת הכלל)",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0",
+    attribution: "Edward Betts",
+  },
 ];
 
 const byId = new Map(visuals.map((v) => [v.id, v]));

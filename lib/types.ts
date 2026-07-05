@@ -3,6 +3,7 @@
 export type DiagramKind =
   | "cpu-inside"
   | "cpu-pch"
+  | "host-sut-frame"
   | "host-sut-ssh"
   | "boot-flow"
   | "post-flow"

@@ -857,6 +857,10 @@ const testEnvOverview: Module = {
           type: "p",
           text: "המבנה הזה — Host אחד ששולט ב-SUT/Target דרך כבל, כשהכול יושב על Frame — הוא שלד שחוזר כמעט בכל עמדת בדיקה שתפגוש.",
         },
+        {
+          type: "diagram",
+          kind: "host-sut-frame",
+        },
       ],
     },
     {
@@ -2872,6 +2876,10 @@ const typeCTcss: Module = {
             "תיאורי תקלה — כמו 'לא מזוהה', 'אין תמונה', 'הטעינה לא עובדת'.",
           ],
         },
+        {
+          type: "image",
+          visualId: "dock-station",
+        },
       ],
     },
     {
@@ -3284,6 +3292,10 @@ const debugConnection: Module = {
           hebrew: "גשש Debug — כלי החומרה של החקירה",
           explanation:
             "כלי חומרה שמתחבר בין מחשב הבודק לבין נקודת ה-Debug במערכת הנבדקת, ומאפשר לאסוף מידע עמוק. 'גשש' כי הוא 'מגשש' ומאזין למה שקורה בפנים.",
+        },
+        {
+          type: "image",
+          visualId: "debug-probe",
         },
         {
           type: "term",

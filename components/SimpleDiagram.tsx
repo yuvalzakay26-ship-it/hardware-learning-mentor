@@ -143,6 +143,48 @@ function CpuPch() {
   );
 }
 
+function HostSutFrame() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        שלושת שחקני סביבת הבדיקה — מי שולט, מי נבדק, ומה מחזיק
+      </figcaption>
+
+      {/* ה-Host — המחשב השולט */}
+      <Box
+        label="Host — המחשב השולט"
+        sub="מריץ את הכלים ושולח פקודות"
+        tone="dark"
+        className="py-2.5"
+      />
+
+      <Wire label="כבל תקשורת" />
+
+      {/* ה-Frame מחזיק את ה-SUT — קופסה עוטפת */}
+      <div className="rounded-xl border-2 border-dashed border-blue/50 bg-blue-tint/40 p-3">
+        <div className="mb-2 text-center text-[11px] font-bold text-blue-deep">
+          Frame — המתקן שמחזיק ומחבר
+        </div>
+        <Box
+          label="SUT / Target — המערכת הנבדקת"
+          sub="הלוח שיושב על ה-Frame ונבדק בפועל"
+          tone="blue"
+          className="py-2.5"
+        />
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          <Box label="ספק כוח" sub="חשמל ל-SUT" />
+          <Box label="כבל Debug" sub="לחקירת תקלות" />
+          <Box label="צג קודים" sub="Port 80" />
+        </div>
+      </div>
+
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        ה-Host שולט מבחוץ · ה-SUT נבדק · ה-Frame מחזיק את הכול ומספק חשמל וחיבורים.
+      </p>
+    </figure>
+  );
+}
+
 function HostSutSsh() {
   return (
     <figure className="rounded-2xl border border-line bg-surface p-4">
@@ -403,6 +445,7 @@ function ThermalFlow() {
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
+  if (kind === "host-sut-frame") return <HostSutFrame />;
   if (kind === "boot-flow") return <BootFlow />;
   if (kind === "post-flow") return <PostFlow />;
   if (kind === "target-devices") return <TargetDevices />;
