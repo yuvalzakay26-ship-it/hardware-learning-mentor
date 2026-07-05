@@ -11,7 +11,8 @@ export type DiagramKind =
   | "typec-flow"
   | "debug-flow"
   | "env-flow"
-  | "thermal-flow";
+  | "thermal-flow"
+  | "ttk-flow";
 
 export type Block =
   | { type: "p"; text: string }

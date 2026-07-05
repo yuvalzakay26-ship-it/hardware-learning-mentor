@@ -442,7 +442,34 @@ function ThermalFlow() {
   );
 }
 
+function TtkFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "נושא הדרכה", sub: "Training Topic — הנושא שמופיע ברשימת ההדרכה", tone: "dark" },
+    { label: "TTK / TTK3", sub: "כלי / ערכת בדיקה של הצוות — לאמת מול המנטור", tone: "blue" },
+    { label: "POST Code / Port 80", sub: "קודי התקדמות ההדלקה שאפשר לראות", tone: "light" },
+    { label: "רמזי Boot / BIOS", sub: "Boot / BIOS Clues — עד לאן הגיעה ההדלקה", tone: "dark" },
+    { label: "ראיות לדיבאג / דוח", sub: "Evidence for Debug / Report — מה שמתעדים ומדווחים", tone: "blue" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        איפה TTK / TTK3 יושב בשרשרת — מנושא ההדרכה ועד לראיות לדוח
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        זהו קישור זהיר, לא הגדרה רשמית: המשמעות המדויקת של TTK / TTK3 דורשת אימות מול הצוות / המנטור.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
+  if (kind === "ttk-flow") return <TtkFlow />;
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
   if (kind === "host-sut-frame") return <HostSutFrame />;
