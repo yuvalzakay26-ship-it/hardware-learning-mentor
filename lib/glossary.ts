@@ -290,7 +290,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "לוח אם חדש שמחובר לשולחן הבדיקה ומופעל שוב ושוב — הוא ה-SUT.",
     workplace:
       "כשמדווחים תקלה, מציינים תמיד על איזה SUT היא קרתה — כדי שאפשר יהיה לשחזר אותה.",
-    related: ["host", "target", "frame"],
+    related: ["host", "target", "frame", "power-splitter", "test-setup"],
   },
   {
     id: "frame",
@@ -302,7 +302,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "הלוח הנבדק מונח פתוח על מסגרת מתכת עם ספק כוח וכבלי Debug — זה ה-Frame.",
     workplace:
       "חיווט לא תקין ב-Frame הוא סיבה נפוצה ל'תקלות' שבעצם אינן תקלה של הלוח עצמו.",
-    related: ["sut", "host", "target"],
+    related: ["sut", "host", "target", "power-splitter", "power-source", "setup"],
   },
   {
     id: "target",
@@ -762,7 +762,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "מטעינים מחשב נייד דרך כבל Type-C — זו אספקת חשמל שעוברת באותו מחבר.",
     workplace:
       "בדיקת טעינה מוודאת שהחשמל מתנהג כמצופה: המכשיר נטען, לא מתחמם מדי, ומתנהג נכון בחיבור וניתוק.",
-    related: ["typec", "cable", "controller", "reproduce"],
+    related: ["typec", "cable", "controller", "reproduce", "power-splitter", "power-source"],
   },
   {
     id: "display-output",
@@ -1431,6 +1431,104 @@ export const glossaryTerms: GlossaryTerm[] = [
     workplace:
       "מונח פנימי לא ברור? מאמתים מול תיעוד הצוות / המנטור, ואז מתעדים לעצמנו גרסה מאומתת.",
     related: ["documentation", "ttk", "ttk3", "tool-version"],
+  },
+
+  // ── חשמל וסידור העמדה: Power Splitter וסביבתו ──
+  {
+    id: "power-splitter",
+    en: "Power Splitter",
+    he: "פיצול חשמל — סידור שמחלק חשמל למספר יעדים",
+    category: "environment",
+    explanation:
+      "באופן כללי, רכיב או סידור שמפצל או מחלק חשמל ממקור אחד ליותר מיעד אחד בעמדת בדיקה. הסוג, השימוש וכללי החיבור תלויים במעבדה ובצוות — ולכן המשמעות והשימוש המדויק דורשים אימות מול הצוות / התיעוד הפנימי. אין ללמוד מכאן חיווט או חיבור חשמל.",
+    example: "בהוראת בדיקה מופיע 'סידור עם פיצול חשמל' — רושמים לעצמנו לשאול את המנטור מה בדיוק הכוונה ומי מורשה לגעת.",
+    workplace:
+      "מכירים את הסידור ומתעדים אותו — אבל לא משנים חיבורי חשמל בלי אישור והדרכה מהצוות.",
+    related: ["power-source", "power-path", "power-distribution", "power-delivery", "frame", "lab-safety", "test-setup"],
+  },
+  {
+    id: "power-source",
+    en: "Power Source",
+    he: "מקור חשמל — מאיפה החשמל מגיע לעמדה",
+    category: "environment",
+    explanation:
+      "הנקודה שממנה מגיע החשמל אל עמדת הבדיקה (למשל ספק כוח). זהו תחילת נתיב החשמל שממנו הכול ניזון. אין לגעת, לחבר או להחליף מקור חשמל בלי אישור והדרכה.",
+    example: "אם העמדה 'מתה' לגמרי, שאלה מוקדמת היא אם מקור החשמל בכלל מזין אותה — בודקים לפי נוהל, לא ביד חופשית.",
+    workplace:
+      "מתעדים באיזה מקור חשמל השתמשה העמדה, כחלק מתיאור הסידור בדוח.",
+    related: ["power-splitter", "power-path", "power-distribution", "frame"],
+  },
+  {
+    id: "power-path",
+    en: "Power Path",
+    he: "נתיב חשמל — הדרך שבה החשמל עובר אל רכיב",
+    category: "environment",
+    explanation:
+      "הדרך שבה החשמל עובר ממקור החשמל אל רכיב מסוים בעמדה. הפרדה או פיצול של נתיבי חשמל יכולים לעזור לוודא שכל חלק מקבל את מה שהוא צריך. זהו מושג לחשיבה — לא הוראת חיווט.",
+    example: "כששואלים 'דרך מה מגיע החשמל לרכיב הזה?' — מדברים על נתיב החשמל אליו.",
+    workplace:
+      "הבנת נתיב החשמל עוזרת לחשוב על תקלות הדלקה — אבל בודקים אותו בזהירות ולפי נוהל בלבד.",
+    related: ["power-source", "power-splitter", "power-distribution"],
+  },
+  {
+    id: "power-distribution",
+    en: "Power Distribution",
+    he: "חלוקת חשמל — הזנת חשמל לכמה יעדים",
+    category: "environment",
+    explanation:
+      "האופן שבו חשמל מחולק ומוזן אל כמה חלקים של העמדה. פיצול חשמל הוא דרך אחת לחלוקת חשמל. הפרטים המדויקים תלויים בעמדה ובתיעוד הצוות.",
+    example: "עמדה שמזינה חשמל גם ל-SUT וגם לכלי מדידה משתמשת בסוג של חלוקת חשמל.",
+    workplace:
+      "מתעדים איך חולק החשמל בעמדה — זה חלק מהפיכת הסידור לחזרתי וניתן לשחזור.",
+    related: ["power-splitter", "power-source", "power-path", "test-setup"],
+  },
+  {
+    id: "setup",
+    en: "Setup",
+    he: "סידור / הקמה — איך העמדה בנויה ומחוברת",
+    category: "environment",
+    explanation:
+      "האופן שבו עמדת הבדיקה בנויה ומחוברת: מה מחובר למה, אילו כלים ומקורות בשימוש, ובאיזו תצורה. סידור מתועד היטב מאפשר לחזור על אותה בדיקה ולקבל אותן תוצאות.",
+    example: "'באיזה סידור השתמשת?' — שאלה שמכוונת לתאר את כל מה שהיה מחובר ומופעל בעמדה.",
+    workplace:
+      "לפני בדיקה מוודאים שהסידור תואם להוראה; אחריה מתעדים אותו כדי שיהיה ניתן לשחזור.",
+    related: ["test-setup", "frame", "power-splitter", "observed-behavior"],
+  },
+  {
+    id: "test-setup",
+    en: "Test Setup",
+    he: "סידור בדיקה — התצורה שבה מריצים בדיקה",
+    category: "environment",
+    explanation:
+      "הסידור הספציפי שבו מריצים בדיקה מסוימת: ה-SUT, הכלים, מקורות החשמל, החיבורים והסביבה — הכול יחד. סידור בדיקה מבוקר ומתועד הוא הבסיס לתוצאה שאפשר לסמוך עליה.",
+    example: "אותה בדיקה בשני סידורי בדיקה שונים עלולה לתת תוצאות שונות — לכן מתעדים את הסידור המדויק.",
+    workplace:
+      "בדוח מציינים את סידור הבדיקה כדי שמישהו אחר יוכל להקים אותו מחדש ולשחזר את מה שראית.",
+    related: ["setup", "frame", "power-splitter", "observed-behavior", "documentation"],
+  },
+  {
+    id: "lab-safety",
+    en: "Lab Safety",
+    he: "בטיחות מעבדה — כללי העבודה הבטוחה בעמדה",
+    category: "environment",
+    explanation:
+      "כללי העבודה שנועדו לשמור עליך, על הציוד ועל הבדיקה. במיוחד בכל מה שקשור לחשמל: לא מאלתרים, לא נוגעים בלי אישור, ולא עוקפים אמצעי הגנה. כשיש ספק — עוצרים ושואלים.",
+    example: "לפני שנוגעים בחיבור חשמל לא מוכר — עוצרים ושואלים את המנטור. זה כלל בטיחות, לא רק נוהל.",
+    workplace:
+      "בטיחות מעבדה קודמת לכל בדיקה. אף תוצאה לא שווה סיכון בטיחותי או פגיעה בציוד.",
+    related: ["power-splitter", "power-source", "permission", "setup"],
+  },
+  {
+    id: "observed-behavior",
+    en: "Observed Behavior",
+    he: "התנהגות שנצפתה — מה שבאמת ראית שקרה",
+    category: "validation",
+    explanation:
+      "תיאור עובדתי של מה שקרה בפועל בבדיקה — מה נדלק, מה לא, אילו קודים או הודעות הופיעו — בלי לפרש ובלי לנחש את הסיבה. תיאור טוב של התנהגות שנצפתה הוא הבסיס לחקירה ולדוח אמין.",
+    example: "'המערכת לא נדלקה, המאווררים לא הסתובבו, לא הופיע קוד' — זו התנהגות שנצפתה, לא מסקנה על הגורם.",
+    workplace:
+      "רושמים קודם מה נצפה בדיוק, ורק אחר כך משערים מה הגורם — כדי לא לצבוע את הראיות במסקנה מוקדמת.",
+    related: ["evidence", "test-setup", "debug-evidence", "documentation"],
   },
 ];
 

@@ -468,7 +468,34 @@ function TtkFlow() {
   );
 }
 
+function PowerSplitterFlow() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "מקור חשמל", sub: "Power Source — מאיפה החשמל מגיע לעמדה", tone: "dark" },
+    { label: "פיצול חשמל", sub: "Power Splitter — מפצל / מחלק את החשמל למספר יעדים", tone: "blue" },
+    { label: "SUT / Target", sub: "המערכת הנבדקת שצריכה חשמל כדי לעלות", tone: "light" },
+    { label: "כלי מעבדה / Frame", sub: "Lab Tools / Frame — עוד חלקים בעמדה שצורכים חשמל", tone: "dark" },
+    { label: "הדלקה / בדיקה / לוגים", sub: "Boot / Test / Logs — מה שרואים בפועל בסוף", tone: "blue" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        איפה פיצול החשמל יושב בעמדה — ממקור החשמל ועד להדלקה ולבדיקה
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        זהו תרשים מושגי בלבד — לא הוראת חיווט. אין לחבר, לשנות או לפצל חשמל בלי אישור והדרכה מהצוות.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
+  if (kind === "power-splitter-flow") return <PowerSplitterFlow />;
   if (kind === "ttk-flow") return <TtkFlow />;
   if (kind === "cpu-inside") return <CpuInside />;
   if (kind === "cpu-pch") return <CpuPch />;
