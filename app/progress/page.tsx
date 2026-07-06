@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ProgressCard from "@/components/ProgressCard";
+import LockSystemButton from "@/components/LockSystemButton";
 import { availableModules } from "@/lib/content";
 import { glossaryTerms } from "@/lib/glossary";
 import { useProgress } from "@/lib/useProgress";
@@ -155,6 +156,19 @@ export default function ProgressPage() {
             );
           })}
         </div>
+      </section>
+
+      {/* גישה פרטית — נעילה מחדש של המערכת במכשיר הזה */}
+      <section aria-label="גישה פרטית" className="mt-8 border-t border-line pt-6">
+        <h2 className="mb-1.5 text-[18px] font-bold">גישה פרטית</h2>
+        <p className="mb-3 text-[13px] leading-relaxed text-ink-soft">
+          מערכת לימוד פרטית של יובל זכאי. אפשר לנעול מחדש את הגישה במכשיר הזה
+          בכל רגע.
+        </p>
+        <LockSystemButton />
+        <p className="mt-3 text-center text-[11px] text-ink-faint">
+          Private Learning System · Yuval Zakay
+        </p>
       </section>
     </main>
   );

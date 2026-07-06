@@ -3,6 +3,7 @@ import { Assistant, Rubik } from "next/font/google";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 import PWARegister from "@/components/PWARegister";
+import PrivateAccessGate from "@/components/PrivateAccessGate";
 
 // גופן הגוף — אסיסטנט: עברי, נקי ומאוד קריא בנייד.
 const assistant = Assistant({
@@ -52,8 +53,15 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl" className={`${assistant.variable} ${rubik.variable}`}>
       <body>
-        <div className="mx-auto min-h-dvh max-w-lg pb-24">{children}</div>
-        <BottomNav />
+        {/*
+          שער הגישה הפרטי עוטף גם את התוכן וגם את הניווט התחתון — כך שכשהמערכת
+          נעולה, לא מוצג תוכן ולא סרגל ניווט. This is a client-side privacy gate,
+          not secure server-side authentication.
+        */}
+        <PrivateAccessGate>
+          <div className="mx-auto min-h-dvh max-w-lg pb-24">{children}</div>
+          <BottomNav />
+        </PrivateAccessGate>
         <PWARegister />
       </body>
     </html>
