@@ -196,6 +196,137 @@ export const termInbox: InboxTerm[] = [
     notesHebrew:
       "כוסה חלקית ובזהירות: מושג 'Module' נוסף למילון (רמת 'פנימי · דורש אימות') ומוסבר בשיעור 'יסודות המעבד' (cpu-foundations). המשמעות המדויקת של 'Module of 4 Atom Cores' תלויה במונח Atom Core — לאמת את שניהם יחד מול הצוות/התיעוד.",
   },
+
+  // ── מונחי שחרור/מוכנות של Central Workflow (Backlog בלבד) ──────────────────
+  // מיוצגים גם ב-lib/learningPaths.ts כ-plannedTerms של מסלול central. כאן הם
+  // נרשמים ב-Backlog לפי תקן: שם מלא באנגלית, ראשי תיבות, והסבר בעברית. אף אחד
+  // אינו שיעור פעיל, ורובם דורשים אימות מול הצוות לפני שמסתמכים עליהם.
+  {
+    id: "inbox-hwqrc",
+    rawUserInput: "HWQRC",
+    normalizedTerm: "Hardware Quality Release Criteria (HWQRC)",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "קריטריוני איכות חומרה לשחרור — אוסף התנאים שהחומרה צריכה לעמוד בהם כדי שאפשר לשחרר. שייך למסלול Central Workflow. המשמעות המדויקת דורשת אימות מול הצוות / התיעוד הפנימי.",
+  },
+  {
+    id: "inbox-qs",
+    rawUserInput: "QS",
+    normalizedTerm: "Qualification Samples (QS)",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "דגימות הסמכה / דגימות Qualification — יחידות חומרה בשלב מתקדם המשמשות לבדיקות לפני שחרור. מסלול Central Workflow. דורש אימות מול הצוות.",
+  },
+  {
+    id: "inbox-prq",
+    rawUserInput: "PRQ",
+    normalizedTerm: "Product Release Qualification (PRQ)",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "הסמכת שחרור מוצר — שלב אישור סופי לפני שחרור ללקוחות. מסלול Central Workflow. דורש אימות מול הצוות.",
+  },
+  {
+    id: "inbox-es1",
+    rawUserInput: "ES1",
+    normalizedTerm: "Engineering Sample 1 (ES1)",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "דגימה הנדסית ראשונה — גרסה הנדסית מוקדמת של החומרה לשלבי הבדיקה הראשונים. מסלול Central Workflow. דורש אימות מול הצוות.",
+  },
+  {
+    id: "inbox-es2",
+    rawUserInput: "ES2",
+    normalizedTerm: "Engineering Sample 2 (ES2)",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "דגימה הנדסית שנייה — מאוחרת יותר מ-ES1, קרובה יותר למוצר הסופי. מסלול Central Workflow. דורש אימות מול הצוות.",
+  },
+  {
+    id: "inbox-mock",
+    rawUserInput: "Mock",
+    normalizedTerm: "Mock",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "שלב הכנה / בדיקת מוכנות — ריצת חזרה לפני עבודה מלאה. מסלול Central Workflow. המשמעות המדויקת דורשת אימות מול הצוות.",
+  },
+  {
+    id: "inbox-power-on",
+    rawUserInput: "Power On",
+    normalizedTerm: "Power On",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "הדלקה ראשונה / הפעלה ראשונית של המערכת — הרגע שבו נותנים חשמל ובודקים שהיא עולה. מסלול Central Workflow. דורש אימות מול הצוות לגבי ההקשר המדויק.",
+  },
+  {
+    id: "inbox-attempt",
+    rawUserInput: "Attempt",
+    normalizedTerm: "Attempt",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "אחוז או כמות הבדיקות שנוסו / הורצו. מסלול Central Workflow. דורש אימות מול הצוות לגבי אופן החישוב המדויק.",
+  },
+  {
+    id: "inbox-pass",
+    rawUserInput: "Pass",
+    normalizedTerm: "Pass",
+    confidence: "needs-confirmation",
+    category: "validation",
+    suggestedStage: null,
+    alreadyCovered: false,
+    shouldAddToGlossary: true,
+    shouldBecomeLesson: false,
+    needsTeamConfirmation: true,
+    notesHebrew:
+      "אחוז או כמות הבדיקות שעברו בהצלחה. מסלול Central Workflow. דורש אימות מול הצוות לגבי אופן החישוב המדויק.",
+  },
 ];
 
 export function getInboxTerm(id: string): InboxTerm | undefined {
