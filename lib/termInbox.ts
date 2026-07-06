@@ -63,12 +63,12 @@ export const termInbox: InboxTerm[] = [
     confidence: "high",
     category: "board",
     suggestedStage: "foundation",
-    alreadyCovered: false,
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: false,
     notesHebrew:
-      "מסלול תקשורת שדרכו רכיבים מעבירים נתונים. מונח בסיסי — מתאים כמושג במילון, לא כשיעור נפרד.",
+      "טופל: נוסף כמושג במילון ומוסבר בשיעור 'יסודות המעבד' (cpu-foundations). מסלול תקשורת שדרכו רכיבים מעבירים נתונים.",
   },
   {
     id: "inbox-gfx",
@@ -105,12 +105,12 @@ export const termInbox: InboxTerm[] = [
     confidence: "medium",
     category: "cpu",
     suggestedStage: "foundation",
-    alreadyCovered: false,
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: false,
     notesHebrew:
-      "כל מה שבמעבד שאינו הליבות עצמן (בקר זיכרון, cache משותף, ממשקים). מונח מתקדם — מתאים כמושג, עם הערה שזה נושא לעומק בהמשך.",
+      "טופל: נוסף כמושג במילון (רמת ביניים) ומוסבר בשיעור 'יסודות המעבד' (cpu-foundations), עם הערה שהגבולות המדויקים משתנים בין פלטפורמות.",
   },
   {
     id: "inbox-transistor",
@@ -119,12 +119,12 @@ export const termInbox: InboxTerm[] = [
     confidence: "high",
     category: "cpu",
     suggestedStage: "foundation",
-    alreadyCovered: false,
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: false,
     notesHebrew:
-      "מתג זעיר — הלבנה הבסיסית ביותר של כל שבב. מתאים כמושג בסיסי במילון, אפשר גם ככרטיס פתיחה בשלב הבסיס.",
+      "טופל: נוסף כמושג בסיסי במילון ומוסבר בפתיחת שיעור 'יסודות המעבד' (cpu-foundations) — מתג זעיר, הלבנה הבסיסית של כל שבב.",
   },
   {
     id: "inbox-threads",
@@ -137,7 +137,8 @@ export const termInbox: InboxTerm[] = [
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: false,
-    notesHebrew: "כבר מכוסה בשיעור המעבד ובמילון. אין צורך בפעולה נוספת מעבר לתחזוקה.",
+    notesHebrew:
+      "מכוסה במילון, בשיעור המעבד וכעת גם בשיעור 'יסודות המעבד' (cpu-foundations). אין צורך בפעולה נוספת מעבר לתחזוקה.",
   },
   {
     id: "inbox-processor",
@@ -150,7 +151,8 @@ export const termInbox: InboxTerm[] = [
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: false,
-    notesHebrew: "מילה נרדפת ל-CPU. מכוסה במלואה בשיעור הראשון ובמילון.",
+    notesHebrew:
+      "מילה נרדפת ל-CPU. נוסף כמושג נפרד במילון ומכוסה בשיעור 'יסודות המעבד' (cpu-foundations) ובשיעור המעבד.",
   },
   {
     id: "inbox-atom-core",
@@ -159,12 +161,12 @@ export const termInbox: InboxTerm[] = [
     confidence: "needs-confirmation",
     category: "cpu",
     suggestedStage: "foundation",
-    alreadyCovered: false,
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "ליבה 'חסכונית' בארכיטקטורה היברידית (מול ליבת ביצועים). השם המדויק והשימוש בצוות דורשים אימות — לסמן מתקדם.",
+      "כוסה חלקית: נוסף למילון (רמת 'פנימי · דורש אימות') ומוסבר בזהירות בשיעור 'יסודות המעבד' (cpu-foundations). ליבה חסכונית/יעילה — המשמעות המדויקת בהקשר הצוות/הפלטפורמה עדיין דורשת אימות מול הצוות.",
   },
   {
     id: "inbox-b-core",
@@ -173,12 +175,12 @@ export const termInbox: InboxTerm[] = [
     confidence: "needs-confirmation",
     category: "cpu",
     suggestedStage: "foundation",
-    alreadyCovered: false,
-    shouldAddToGlossary: false,
+    alreadyCovered: true,
+    shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "מונח לא ודאי — ייתכן שמדובר ב'Big Core'/ליבת ביצועים או בשם פנימי. לא להוסיף למילון עד אימות ברור מול הצוות.",
+      "כוסה חלקית ובזהירות: נוסף למילון ולשיעור 'יסודות המעבד' (cpu-foundations) מסומן במפורש כ'דורש אימות' — לא מוגדר כעובדה. ייתכן 'Big Core'/ליבת ביצועים או שם פנימי. עדיין דורש אימות ברור מול הצוות.",
   },
   {
     id: "inbox-module-atom",
@@ -187,12 +189,12 @@ export const termInbox: InboxTerm[] = [
     confidence: "needs-confirmation",
     category: "cpu",
     suggestedStage: "foundation",
-    alreadyCovered: false,
-    shouldAddToGlossary: false,
+    alreadyCovered: true,
+    shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "קבוצה של 4 ליבות Atom שחולקות משאבים (למשל cache). התלוי במונח Atom Core הלא-ודאי — לאמת את שניהם יחד לפני הוספה.",
+      "כוסה חלקית ובזהירות: מושג 'Module' נוסף למילון (רמת 'פנימי · דורש אימות') ומוסבר בשיעור 'יסודות המעבד' (cpu-foundations). המשמעות המדויקת של 'Module of 4 Atom Cores' תלויה במונח Atom Core — לאמת את שניהם יחד מול הצוות/התיעוד.",
   },
 ];
 

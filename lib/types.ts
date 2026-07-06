@@ -1,6 +1,9 @@
 // טיפוסים משותפים לכל מערכת הלמידה
 
 export type DiagramKind =
+  | "cpu-foundation-ladder"
+  | "cpu-inner-map"
+  | "core-module"
   | "cpu-inside"
   | "cpu-pch"
   | "host-sut-frame"

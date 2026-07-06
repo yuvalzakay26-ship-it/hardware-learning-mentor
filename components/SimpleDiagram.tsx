@@ -587,7 +587,114 @@ function DebugConnector() {
   );
 }
 
+function CpuFoundationLadder() {
+  const rungs = [
+    { label: "פלטפורמה", sub: "המערכת כולה — מעבד + לוח + רכיבים", tone: "blue" as const },
+    { label: "מעבד (CPU)", sub: "כמה ליבות + Uncore באריזה אחת", tone: "dark" as const },
+    { label: "ליבה (Core)", sub: "יחידת עיבוד שמריצה הוראות", tone: "dark" as const },
+    { label: "בלוק לוגי", sub: "יחידה שמבצעת משימה מוגדרת", tone: "light" as const },
+    { label: "לוגיקה", sub: "שערים לוגיים מטרנזיסטורים", tone: "light" as const },
+    { label: "טרנזיסטור", sub: "מתג זעיר — הלבנה הבסיסית", tone: "light" as const },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        סולם היסודות — מהמתג הקטן ועד הפלטפורמה
+      </figcaption>
+      <div className="flex flex-col gap-1">
+        {rungs.map((r, i) => (
+          <div key={r.label}>
+            <Box label={r.label} sub={r.sub} tone={r.tone} />
+            {i < rungs.length - 1 && (
+              <div className="flex justify-center" aria-hidden="true">
+                <span className="text-[13px] leading-none text-blue/70">▲</span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        כל שכבה בנויה מהמון עותקים של השכבה שמתחתיה. תרשים מושגי בלבד.
+      </p>
+    </figure>
+  );
+}
+
+function CpuInnerMap() {
+  const parts = [
+    { label: "Core", sub: "מריץ הוראות" },
+    { label: "Cache", sub: "זיכרון מהיר צמוד" },
+    { label: "Uncore", sub: "תומך בליבות" },
+    { label: "בקר זיכרון", sub: "Memory Controller" },
+    { label: "נתיבי PCIe / מערכת", sub: "חיבור לרכיבים" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מפה פשוטה של מה שיש בתוך המעבד
+      </figcaption>
+      <div className="rounded-xl border-2 border-navy bg-navy p-3">
+        <div className="mb-2 text-center font-mono text-[11px] font-bold tracking-widest text-blue-tint" dir="ltr">
+          CPU
+        </div>
+        <div className="flex flex-col gap-1.5">
+          {parts.map((p) => (
+            <div
+              key={p.label}
+              className="flex items-center justify-between rounded-lg bg-navy-deep px-2.5 py-1.5"
+            >
+              <span className="text-[12px] font-bold text-white">{p.label}</span>
+              <span className="text-[10px] text-white/60">{p.sub}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        הליבה מבצעת הוראות; כל השאר הוא Uncore שתומך בה. החלוקה והשמות המדויקים משתנים בין פלטפורמות.
+      </p>
+    </figure>
+  );
+}
+
+function CoreModule() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        ליבה ← מודול ← מעבד (מודל מנטלי)
+      </figcaption>
+      <div className="rounded-xl border-2 border-navy bg-navy p-3">
+        <div className="mb-2 text-center text-[11px] font-bold text-white/80">
+          מודול — קבוצת ליבות
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="rounded-lg bg-navy-deep p-2 text-center">
+              <div className="text-[12px] font-bold text-white">Atom Core {n}</div>
+              <div className="mt-0.5 text-[10px] text-white/60">ליבה חסכונית</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 rounded-lg bg-blue/90 py-1.5 text-center">
+          <span className="text-[11px] font-bold text-white">
+            4 ליבות Atom = מודול אחד
+          </span>
+        </div>
+      </div>
+      <div className="flex justify-center" aria-hidden="true">
+        <span className="text-[13px] leading-none text-blue/70">▼</span>
+      </div>
+      <Box label="מעבד (Processor)" sub="מכיל מודול/ים וליבות נוספות" tone="dark" />
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תרשים מושגי בלבד. המשמעות המדויקת של &quot;Module of 4 Atom Cores&quot; דורשת אימות מול הצוות / התיעוד הפנימי.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
+  if (kind === "cpu-foundation-ladder") return <CpuFoundationLadder />;
+  if (kind === "cpu-inner-map") return <CpuInnerMap />;
+  if (kind === "core-module") return <CoreModule />;
   if (kind === "thermal-sensor") return <ThermalSensor />;
   if (kind === "debug-connector") return <DebugConnector />;
   if (kind === "power-splitter-flow") return <PowerSplitterFlow />;

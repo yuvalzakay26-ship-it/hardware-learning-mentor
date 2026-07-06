@@ -135,15 +135,39 @@ export interface LessonMeta {
 }
 
 export const lessonMeta: Record<string, LessonMeta> = {
-  "cpu-overview": {
+  "cpu-foundations": {
     stageId: "foundation",
     prerequisites: [],
     prereqKnowledge: [],
     whyNow:
-      "זו נקודת ההתחלה: כל שאר המסלול נשען על הבנה בסיסית של מה זה מעבד ואיך הוא עובד.",
+      "זו נקודת ההתחלה של כל המסלול: מפה פשוטה של מה שיש בתוך המעבד ומסביבו. כל שאר השיעורים — CPU, BIOS, POST, PCIe, Debug — נשענים על היסודות האלה.",
+    introducedTerms: [
+      "Transistor",
+      "Logic",
+      "Processor",
+      "CPU",
+      "Core",
+      "Thread",
+      "Cache",
+      "Bus",
+      "Uncore",
+      "Atom Core",
+      "B-Core",
+      "Module",
+    ],
+    reinforcedTerms: ["RAM", "BIOS", "POST", "PCIe", "PCH", "Thermal", "Debug"],
+    advancedTerms: ["Memory Controller", "System Agent", "PCIe Root Complex", "Interconnect"],
+    companySpecificTerms: ["B-Core", "Module of 4 Atom Cores", "Atom Core"],
+  },
+  "cpu-overview": {
+    stageId: "foundation",
+    prerequisites: ["cpu-foundations"],
+    prereqKnowledge: ["מפת היסודות של המעבד: טרנזיסטור, ליבה, ת'רד, מטמון, Bus ו-Uncore"],
+    whyNow:
+      "אחרי מפת היסודות, כאן מעמיקים במעבד עצמו — מה זה, ממה הוא בנוי ואיך הוא עובד בפועל.",
     introducedTerms: ["CPU", "Processor", "Core", "Thread", "Cache", "Clock", "Instruction"],
-    reinforcedTerms: [],
-    advancedTerms: ["Uncore", "Atom Core", "B-Core", "Module", "Bus", "Transistor", "RAM"],
+    reinforcedTerms: ["Transistor", "Bus"],
+    advancedTerms: ["Uncore", "Atom Core", "B-Core", "Module", "RAM"],
     companySpecificTerms: [],
   },
   "cpu-pch": {
