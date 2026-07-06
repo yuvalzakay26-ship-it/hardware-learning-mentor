@@ -3,17 +3,20 @@
 /*
  * LockSystemButton — נועל מחדש את המערכת הפרטית במכשיר הזה.
  *
- * This is a client-side privacy gate, not secure server-side authentication.
- * הכפתור רק מסיר את מפתח הפתיחה מ-localStorage וטוען מחדש את הדף, כך ששער
- * הגישה (PrivateAccessGate) יופיע שוב. אינו נוגע בהתקדמות, בהערות או במושגים.
+ * This is a client-side privacy gate. It does not provide real server-side
+ * authentication or real device monitoring.
+ *
+ * מכיוון שמצב הפתיחה חי בזיכרון בלבד (ולא ב-localStorage), טעינה מחדש של הדף
+ * מאפסת אותו ומחזירה את שער הגישה. גם מנקים מפתח פתיחה קבוע ישן אם נותר.
+ * אינו נוגע בהתקדמות, בהערות או במושגים.
  */
 
-import { lockAccess } from "@/lib/access";
+import { clearLegacyUnlock } from "@/lib/access";
 
 export default function LockSystemButton() {
   function handleLock() {
-    lockAccess();
-    // טעינה מחדש → שער הגישה קורא את ה-localStorage ומציג את מסך הנעילה.
+    clearLegacyUnlock();
+    // טעינה מחדש → מצב הפתיחה שבזיכרון מתאפס ושער הגישה מופיע שוב.
     window.location.reload();
   }
 

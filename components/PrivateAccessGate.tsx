@@ -3,38 +3,43 @@
 /*
  * PrivateAccessGate — מסך כניסה פרטי הנעול לפני כל תוכן האפליקציה.
  *
- * This is a client-side privacy gate, not secure server-side authentication.
- * מדובר במחסום פרטיות בצד הלקוח בלבד (localStorage) — לא במנגנון אימות מאובטח
- * בצד השרת. מטרתו למנוע גישה מזדמנת ולהבהיר שהמערכת פרטית ואישית.
+ * This is a client-side privacy gate. It does not provide real server-side
+ * authentication or real device monitoring.
  *
- * התנהגות:
- *  - עד שהרכיב "עולה" (mounted) מוצג רקע כהה ניטרלי — כדי למנוע קפיצת תוכן
- *    ובעיות hydration (השרת אינו יודע מה מצב ה-localStorage).
- *  - לאחר העלייה: אם המערכת פתוחה — מוצג התוכן (children). אחרת — מסך הנעילה.
- *  - סיסמה נכונה פותחת מיד ושומרת את המצב מקומית.
+ * מדובר במחסום פרטיות בצד הלקוח בלבד — לא במנגנון אימות מאובטח בצד השרת ולא
+ * בניטור מכשירים אמיתי. מטרתו למנוע גישה מזדמנת ולהבהיר שהמערכת פרטית ואישית.
+ *
+ * התנהגות גישה (session-only):
+ *  - מצב הפתיחה נשמר אך ורק בזיכרון של הרכיב (React state) — לא ב-localStorage.
+ *  - לכן כל טעינה מחדש, פתיחת טאב חדש, או סגירה ופתיחה של האפליקציה דורשות שוב
+ *    סיסמה. אין "זכירת פתיחה" מתמשכת.
+ *  - עד שהרכיב "עולה" (mounted) מוצג רקע כהה ניטרלי — למניעת קפיצת תוכן ובעיות
+ *    hydration (השרת אינו יודע מה מצב הריצה בצד הלקוח).
+ *  - מפתח פתיחה ישן וקבוע (אם נותר מגרסה קודמת) מנוקה בעת העלייה.
  */
 
 import { useEffect, useRef, useState } from "react";
-import { ACCESS_PASSWORD, isUnlocked, unlockAccess } from "@/lib/access";
+import { clearLegacyUnlock, isCorrectPassword } from "@/lib/access";
 
 export default function PrivateAccessGate({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [mounted, setMounted] = useState(false);
+  // מצב הפתיחה חי בזיכרון בלבד — מתאפס בכל טעינה מחדש / טאב חדש.
   const [unlocked, setUnlocked] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setUnlocked(isUnlocked());
+    // מנקים מפתח פתיחה קבוע ישן — כדי שלא יישאר מצב פתיחה מתמשך.
+    clearLegacyUnlock();
     setMounted(true);
   }, []);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (value === ACCESS_PASSWORD) {
-      unlockAccess();
+    if (isCorrectPassword(value)) {
       setError(false);
       setUnlocked(true);
     } else {
@@ -46,12 +51,7 @@ export default function PrivateAccessGate({
 
   // לפני העלייה — רקע כהה ניטרלי, בלי תוכן ובלי ניווט. עקבי בין שרת ללקוח.
   if (!mounted) {
-    return (
-      <div
-        aria-hidden="true"
-        className="fixed inset-0 bg-[#0a0505]"
-      />
-    );
+    return <div aria-hidden="true" className="fixed inset-0 bg-[#0a0505]" />;
   }
 
   if (unlocked) {
@@ -94,6 +94,25 @@ export default function PrivateAccessGate({
           </svg>
         </div>
 
+        {/* תווית אזהרה קטנה — «גישה למורשים בלבד» */}
+        <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-red-500/50 bg-red-950/50 px-3 py-1 text-[12px] font-bold tracking-wide text-red-300">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            className="h-3.5 w-3.5"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 3 2.5 20h19L12 3ZM12 9.5v4.5M12 17h.01"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          גישה למורשים בלבד
+        </span>
+
         <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-red-400/90">
           Private System
         </p>
@@ -101,20 +120,30 @@ export default function PrivateAccessGate({
           מערכת פרטית נעולה
         </h1>
         <p className="mt-2 text-[15px] font-medium text-red-200/85">
-          מנטור החומרה — מערכת לימוד פרטית
+          מנטור החומרה — מערכת לימוד פרטית של יובל זכאי
         </p>
 
-        {/* אזהרה — מסגרת אדומה, רצינית */}
+        {/* אזהרה ראשית — מסגרת אדומה, רצינית */}
         <div className="mt-6 w-full rounded-xl border border-red-700/50 bg-red-950/30 p-4 text-right">
           <p className="text-[13.5px] leading-relaxed text-red-100/90">
-            מערכת זו נבנתה לשימוש אישי ופרטי בלבד על ידי יובל זכאי. אין להעביר,
-            לשלוח, להעתיק, להשתמש או לאפשר גישה לאדם אחר ללא הרשאה מיוחדת ומפורשת
-            מהיוצר — יובל זכאי.
+            המערכת מיועדת לשימוש אישי ופרטי בלבד על ידי יובל זכאי. אין להעביר,
+            לשלוח, להעתיק, לפרסם, לשתף קישור, לשתף סיסמה או לאפשר שימוש לאדם אחר
+            ללא הרשאה מפורשת מהיוצר — יובל זכאי.
           </p>
         </div>
 
-        <p className="mt-3 text-[12.5px] text-red-300/70">
-          כניסה למערכת מותרת רק למי שקיבל הרשאה.
+        {/* בלוק אזהרה נוסף — כניסה ללא הרשאה אסורה */}
+        <div className="mt-3 w-full rounded-xl border border-red-600/60 bg-red-900/25 p-4 text-right">
+          <p className="text-[13.5px] font-semibold leading-relaxed text-red-100">
+            כניסה ללא הרשאה אסורה. שימוש לא מורשה במערכת, ניסיון כניסה או העברת
+            הגישה לאחרים אינם מאושרים.
+          </p>
+        </div>
+
+        {/* ניסוח כן לגבי אופי הנעילה — בלי לטעון לניטור מכשירים אמיתי */}
+        <p className="mt-3 text-right text-[12px] leading-relaxed text-red-300/70">
+          הגישה מיועדת למכשירים מורשים בלבד. בשלב זה מדובר בנעילת פרטיות בצד
+          הלקוח, ולא במערכת אימות שרת מלאה.
         </p>
 
         {/* טופס כניסה */}
