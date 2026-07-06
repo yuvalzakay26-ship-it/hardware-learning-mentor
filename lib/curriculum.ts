@@ -20,7 +20,8 @@ export type StageId =
   | "boot-bios" // Boot / BIOS / Debug מוקדם
   | "system-connectors" // חיבורים ורכיבי מערכת
   | "advanced-debug" // Debug מתקדם
-  | "environments-thermal"; // סביבות עבודה ותרמי
+  | "environments-thermal" // סביבות עבודה ותרמי
+  | "central-release"; // מחזור מוכנות ושחרור חומרה (Central Workflow)
 
 export interface Stage {
   id: StageId;
@@ -106,6 +107,25 @@ export const stages: Stage[] = [
     subtitle: "השוואת סביבות ולידציה, והתנהגות המערכת תחת חום.",
     chipLabel: "OS",
     topics: ["OSBV", "SVOS", "Thermal", "Sensor", "Throttling", "Cooling"],
+  },
+  {
+    id: "central-release",
+    order: 8,
+    title: "מחזור מוכנות ושחרור חומרה",
+    subtitle:
+      "איך פרויקט חומרה מתקדם משלב לשלב — מ-Mock ועד PRQ — ואיך קוראים מוכנות לשחרור.",
+    chipLabel: "PRQ",
+    topics: [
+      "Mock",
+      "Power On (P0)",
+      "Engineering Sample 1 (ES1)",
+      "Engineering Sample 2 (ES2)",
+      "Qualification Samples (QS)",
+      "Product Release Qualification (PRQ)",
+      "Hardware Quality Release Criteria (HWQRC)",
+      "Attempt",
+      "Pass",
+    ],
   },
 ];
 
@@ -309,6 +329,47 @@ export const lessonMeta: Record<string, LessonMeta> = {
     reinforcedTerms: ["CPU"],
     advancedTerms: [],
     companySpecificTerms: [],
+  },
+  "hardware-release-lifecycle": {
+    stageId: "central-release",
+    prerequisites: [],
+    prereqKnowledge: [
+      "היכרות בסיסית עם המערכת הנבדקת (SUT)",
+      "מה זה BIOS ומה זה POST — שלב העלייה של המערכת",
+    ],
+    whyNow:
+      "זהו השיעור הפעיל הראשון במסלול Central Workflow. הוא נותן את המפה הגדולה של איך פרויקט חומרה מתקדם משלב לשלב — Mock, Power On, ES1, ES2, QS ו-PRQ — כדי שכל שיחה על 'באיזה שלב אנחנו' ו'מה אחוז ה-Pass' תהיה מובנת.",
+    introducedTerms: [
+      "Mock",
+      "Power On",
+      "P0",
+      "Engineering Sample 1",
+      "ES1",
+      "Engineering Sample 2",
+      "ES2",
+      "Qualification Samples",
+      "QS",
+      "Product Release Qualification",
+      "PRQ",
+      "Hardware Quality Release Criteria",
+      "HWQRC",
+      "Attempt",
+      "Pass",
+      "Release Readiness",
+      "Test Coverage",
+      "Pass Rate",
+    ],
+    reinforcedTerms: [
+      "SUT",
+      "BIOS",
+      "POST",
+      "Triage",
+      "Logs",
+      "Issue Tracking",
+      "Central Workflow",
+    ],
+    advancedTerms: [],
+    companySpecificTerms: ["HWQRC", "QS", "PRQ", "Mock", "P0", "Central Workflow"],
   },
 };
 

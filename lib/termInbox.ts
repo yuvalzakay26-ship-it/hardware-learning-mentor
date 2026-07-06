@@ -197,23 +197,24 @@ export const termInbox: InboxTerm[] = [
       "כוסה חלקית ובזהירות: מושג 'Module' נוסף למילון (רמת 'פנימי · דורש אימות') ומוסבר בשיעור 'יסודות המעבד' (cpu-foundations). המשמעות המדויקת של 'Module of 4 Atom Cores' תלויה במונח Atom Core — לאמת את שניהם יחד מול הצוות/התיעוד.",
   },
 
-  // ── מונחי שחרור/מוכנות של Central Workflow (Backlog בלבד) ──────────────────
-  // מיוצגים גם ב-lib/learningPaths.ts כ-plannedTerms של מסלול central. כאן הם
-  // נרשמים ב-Backlog לפי תקן: שם מלא באנגלית, ראשי תיבות, והסבר בעברית. אף אחד
-  // אינו שיעור פעיל, ורובם דורשים אימות מול הצוות לפני שמסתמכים עליהם.
+  // ── מונחי שחרור/מוכנות של Central Workflow ─────────────────────────────────
+  // מיוצגים גם ב-lib/learningPaths.ts כ-plannedTerms של מסלול central. כולם
+  // מכוסים כעת (במלואם או חלקית) בשיעור הפעיל 'מחזור מוכנות חומרה — מ-Mock עד
+  // PRQ' (hardware-release-lifecycle) שבמסלול Central Workflow. הם נשארים כאן
+  // לתיעוד ולמעקב, ורובם עדיין דורשים אימות מול הצוות לגבי המשמעות/החישוב המדויק.
   {
     id: "inbox-hwqrc",
     rawUserInput: "HWQRC",
     normalizedTerm: "Hardware Quality Release Criteria (HWQRC)",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "קריטריוני איכות חומרה לשחרור — אוסף התנאים שהחומרה צריכה לעמוד בהם כדי שאפשר לשחרר. שייך למסלול Central Workflow. המשמעות המדויקת דורשת אימות מול הצוות / התיעוד הפנימי.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. קריטריוני איכות חומרה לשחרור — אוסף התנאים שהחומרה צריכה לעמוד בהם כדי שאפשר לשחרר. הקריטריונים המדויקים דורשים אימות מול הצוות / התיעוד הפנימי.",
   },
   {
     id: "inbox-qs",
@@ -221,13 +222,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Qualification Samples (QS)",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "דגימות הסמכה / דגימות Qualification — יחידות חומרה בשלב מתקדם המשמשות לבדיקות לפני שחרור. מסלול Central Workflow. דורש אימות מול הצוות.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. דגימות הסמכה / דגימות Qualification — יחידות חומרה בשלב מתקדם המשמשות לבדיקות לפני שחרור. דורש אימות מול הצוות.",
   },
   {
     id: "inbox-prq",
@@ -235,13 +236,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Product Release Qualification (PRQ)",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "הסמכת שחרור מוצר — שלב אישור סופי לפני שחרור ללקוחות. מסלול Central Workflow. דורש אימות מול הצוות.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. הסמכת שחרור מוצר — שלב אישור סופי לפני שחרור ללקוחות. תהליך ה-PRQ המדויק דורש אימות מול הצוות.",
   },
   {
     id: "inbox-es1",
@@ -249,13 +250,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Engineering Sample 1 (ES1)",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "דגימה הנדסית ראשונה — גרסה הנדסית מוקדמת של החומרה לשלבי הבדיקה הראשונים. מסלול Central Workflow. דורש אימות מול הצוות.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. דגימה הנדסית ראשונה — גרסה הנדסית מוקדמת של החומרה לשלבי הבדיקה הראשונים. הציפיות המדויקות דורשות אימות מול הצוות.",
   },
   {
     id: "inbox-es2",
@@ -263,13 +264,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Engineering Sample 2 (ES2)",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "דגימה הנדסית שנייה — מאוחרת יותר מ-ES1, קרובה יותר למוצר הסופי. מסלול Central Workflow. דורש אימות מול הצוות.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. דגימה הנדסית שנייה — מאוחרת יותר מ-ES1, קרובה יותר למוצר הסופי. ההבחנה המדויקת בין השלבים דורשת אימות מול הצוות.",
   },
   {
     id: "inbox-mock",
@@ -277,13 +278,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Mock",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "שלב הכנה / בדיקת מוכנות — ריצת חזרה לפני עבודה מלאה. מסלול Central Workflow. המשמעות המדויקת דורשת אימות מול הצוות.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. שלב הכנה / בדיקת מוכנות — ריצת חזרה לפני עבודה מלאה. המשמעות המדויקת של Mock משתנה לפי צוות ותהליך — דורש אימות מול הצוות.",
   },
   {
     id: "inbox-power-on",
@@ -291,13 +292,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Power On",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "הדלקה ראשונה / הפעלה ראשונית של המערכת — הרגע שבו נותנים חשמל ובודקים שהיא עולה. מסלול Central Workflow. דורש אימות מול הצוות לגבי ההקשר המדויק.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון (כ-Power On (P0)). הדלקה ראשונה / הפעלה ראשונית של המערכת — הרגע שבו נותנים חשמל ובודקים שהיא עולה. ההקשר המדויק דורש אימות מול הצוות.",
   },
   {
     id: "inbox-attempt",
@@ -305,13 +306,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Attempt",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "אחוז או כמות הבדיקות שנוסו / הורצו. מסלול Central Workflow. דורש אימות מול הצוות לגבי אופן החישוב המדויק.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון. אחוז או כמות הבדיקות שנוסו / הורצו. אופן החישוב המדויק (מתוך מה מודדים) דורש אימות מול הצוות.",
   },
   {
     id: "inbox-pass",
@@ -319,13 +320,13 @@ export const termInbox: InboxTerm[] = [
     normalizedTerm: "Pass",
     confidence: "needs-confirmation",
     category: "validation",
-    suggestedStage: null,
-    alreadyCovered: false,
+    suggestedStage: "central-release",
+    alreadyCovered: true,
     shouldAddToGlossary: true,
     shouldBecomeLesson: false,
     needsTeamConfirmation: true,
     notesHebrew:
-      "אחוז או כמות הבדיקות שעברו בהצלחה. מסלול Central Workflow. דורש אימות מול הצוות לגבי אופן החישוב המדויק.",
+      "כוסה בשיעור 'מחזור מוכנות חומרה' (hardware-release-lifecycle) ונוסף למילון (יחד עם Pass Rate). אחוז או כמות הבדיקות שעברו בהצלחה. אופן החישוב המדויק (מתוך מה מודדים) דורש אימות מול הצוות.",
   },
 ];
 

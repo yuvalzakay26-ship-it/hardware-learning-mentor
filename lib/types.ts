@@ -18,7 +18,10 @@ export type DiagramKind =
   | "ttk-flow"
   | "power-splitter-flow"
   | "thermal-sensor"
-  | "debug-connector";
+  | "debug-connector"
+  | "release-lifecycle"
+  | "attempt-pass"
+  | "stage-maturity";
 
 export type Block =
   | { type: "p"; text: string }

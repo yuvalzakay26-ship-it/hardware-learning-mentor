@@ -117,13 +117,14 @@ function StageList({
 
 // ── מסלול מתוכנן (Central / Tools): סשנים ומונחים כ"בקרוב" ──────────────────
 
-function PlannedPath({ path }: { path: LearningPath }) {
+function PlannedPath({ path, mixed = false }: { path: LearningPath; mixed?: boolean }) {
   return (
     <div className="mt-6 space-y-8">
       <div className="rounded-2xl border border-dashed border-line bg-blue-tint/40 p-4">
         <p className="text-[13px] leading-relaxed text-ink-soft">
-          זהו מסלול מתוכנן. עדיין אין בו שיעורים מלאים — כאן מרוכזים הסשנים
-          והמונחים שיֵלמדו בהמשך, כדי שיהיה ברור מה מחכה קדימה.
+          {mixed
+            ? "מעבר לשיעור הפעיל שלמעלה, מסלול זה כולל סשנים ומונחים מתוכננים שיֵלמדו בהמשך — כאן מרוכז מה שמחכה קדימה."
+            : "זהו מסלול מתוכנן. עדיין אין בו שיעורים מלאים — כאן מרוכזים הסשנים והמונחים שיֵלמדו בהמשך, כדי שיהיה ברור מה מחכה קדימה."}
         </p>
       </div>
 
@@ -216,15 +217,18 @@ function ModulesContent() {
     ? activePath.descriptionHebrew
     : "המסלול בנוי בשלבים — מהבסיס ועד למתקדם. כל שלב נשען על מה שלפניו, וכל שיעור מסביר למה הוא מופיע בדיוק כאן ומה כדאי לדעת לפניו.";
 
-  // אילו שלבים להציג: מסלול "יסודות חומרה" → השלבים שלו; "הכל" → כל השלבים.
-  const stageIds: StageId[] =
-    activePath && activePath.status !== "active"
+  // אילו שלבים להציג: מסלול פעיל/משולב → השלבים שלו; "הכל" → כל השלבים;
+  // מסלול מתוכנן בלבד → אין שלבים פעילים.
+  const stageIds: StageId[] = activePath
+    ? activePath.status === "planned"
       ? []
-      : activePath
-        ? activePath.relatedStageIds
-        : stages.map((s) => s.id);
+      : activePath.relatedStageIds
+    : stages.map((s) => s.id);
 
-  const showPlanned = activePath && activePath.status !== "active";
+  const isMixed = activePath?.status === "mixed";
+  // מסלול מתוכנן בלבד או משולב מציג גם את הסשנים/מונחים המתוכננים.
+  const showPlanned = Boolean(activePath && activePath.status !== "active");
+  const showStages = stageIds.length > 0;
 
   return (
     <main className="px-4 pt-8">
@@ -240,14 +244,16 @@ function ModulesContent() {
 
       <PathSelector active={activePathId} />
 
-      {showPlanned && activePath ? (
-        <PlannedPath path={activePath} />
-      ) : (
+      {showStages && (
         <StageList
           stageIds={stageIds}
           completedLessons={progress.completedLessons}
           sectionReached={progress.sectionReached}
         />
+      )}
+
+      {showPlanned && activePath && (
+        <PlannedPath path={activePath} mixed={isMixed} />
       )}
     </main>
   );

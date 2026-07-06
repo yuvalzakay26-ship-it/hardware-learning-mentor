@@ -97,8 +97,10 @@ export const learningPaths: LearningPath[] = [
     descriptionHebrew:
       "איך צוות Central עובד בפועל: מחזור בדיקה, הרצות, טריאז׳, תקלות, Screening ושלבי מוכנות לשחרור.",
     emoji: "🧭",
-    status: "planned",
-    relatedStageIds: [],
+    // מסלול משולב: יש בו כבר שיעור פעיל אחד (מחזור מוכנות החומרה), ולצידו סשנים
+    // ומונחים מתוכננים שיֵלמדו בהמשך.
+    status: "mixed",
+    relatedStageIds: ["central-release"],
     plannedSessions: [
       {
         id: "central-intro",

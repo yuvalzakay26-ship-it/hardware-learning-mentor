@@ -13,11 +13,15 @@ export default function LearningPathCard({
   /** כמה מהם הושלמו (למסלול פעיל). */
   lessonsDone?: number;
 }) {
-  const isActive = path.status === "active";
-  const buttonLabel = isActive ? "כניסה למסלול" : "צפייה במסלול";
+  // מסלול "מתוכנן בלבד" — עדיין אין בו שיעורים פעילים (מציג תג "בקרוב").
+  const isPlannedOnly = path.status === "planned";
+  // יש שיעורים פעילים (מסלול פעיל או משולב) — ניתן להיכנס ולהתקדם.
+  const hasLessons = (lessonsTotal ?? 0) > 0;
+  const isMixed = path.status === "mixed";
+  const buttonLabel = hasLessons ? "כניסה למסלול" : "צפייה במסלול";
 
   const percent =
-    isActive && lessonsTotal
+    hasLessons && lessonsTotal
       ? Math.round(((lessonsDone ?? 0) / lessonsTotal) * 100)
       : 0;
 
@@ -46,9 +50,14 @@ export default function LearningPathCard({
             >
               {path.chip}
             </span>
-            {!isActive && (
+            {isPlannedOnly && (
               <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-[10.5px] font-semibold text-ink-soft">
                 בקרוב
+              </span>
+            )}
+            {isMixed && (
+              <span className="rounded-full bg-blue-tint px-2 py-0.5 text-[10.5px] font-semibold text-blue-deep">
+                שיעור פעיל + מתוכנן
               </span>
             )}
           </div>
@@ -62,8 +71,8 @@ export default function LearningPathCard({
         {path.descriptionHebrew}
       </p>
 
-      {/* מטא-נתונים: התקדמות למסלול פעיל, ספירת פריטים מתוכננים למסלול מתוכנן */}
-      {isActive && lessonsTotal ? (
+      {/* מטא-נתונים: התקדמות למסלול עם שיעורים, ספירת פריטים מתוכננים למסלול מתוכנן */}
+      {hasLessons && lessonsTotal ? (
         <div className="mt-4">
           <div className="flex items-center justify-between text-[12.5px] font-semibold text-ink-soft">
             <span>
@@ -79,6 +88,11 @@ export default function LearningPathCard({
               style={{ width: `${Math.max(percent, 2)}%` }}
             />
           </div>
+          {isMixed && plannedCount > 0 && (
+            <p className="mt-2 text-[12px] font-semibold text-ink-faint">
+              ועוד {plannedCount} פריטים מתוכננים · סשנים ומונחים
+            </p>
+          )}
         </div>
       ) : (
         <p className="mt-3 text-[12.5px] font-semibold text-ink-faint">

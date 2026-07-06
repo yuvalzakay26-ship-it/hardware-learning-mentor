@@ -691,7 +691,118 @@ function CoreModule() {
   );
 }
 
+function ReleaseLifecycle() {
+  const stages: { en: string; he: string; tone: "light" | "dark" | "blue" }[] = [
+    { en: "Mock", he: "מוכנות", tone: "light" },
+    { en: "Power On / P0", he: "הדלקה ראשונה", tone: "dark" },
+    { en: "ES1", he: "דגימה מוקדמת", tone: "blue" },
+    { en: "ES2", he: "דגימה מתקדמת יותר", tone: "dark" },
+    { en: "QS", he: "הסמכה", tone: "blue" },
+    { en: "PRQ", he: "מוכנות לשחרור", tone: "dark" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        ציר הזמן של מחזור השחרור — מ-Mock ועד PRQ
+      </figcaption>
+      {stages.map((s, i) => (
+        <div key={s.en}>
+          <div
+            className={`rounded-lg border px-2 py-1.5 text-center ${
+              s.tone === "dark"
+                ? "border-navy-deep bg-navy text-white"
+                : s.tone === "blue"
+                  ? "border-blue/40 bg-blue-tint text-blue-deep"
+                  : "border-line bg-bg text-ink"
+            }`}
+          >
+            <div className="font-mono text-[12px] font-bold leading-tight" dir="ltr">
+              {s.en}
+            </div>
+            <div className="mt-0.5 text-[10.5px] leading-tight opacity-80">{s.he}</div>
+          </div>
+          {i < stages.length - 1 && (
+            <div className="flex justify-center" aria-hidden="true">
+              <span className="text-[13px] leading-none text-blue/70">▼</span>
+            </div>
+          )}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        בהתחלה המטרה היא מוכנות וסימני חיים; בהמשך — יציבות, הסמכה ומוכנות לשחרור. תרשים מושגי בלבד; החלוקה המדויקת דורשת אימות מול הצוות.
+      </p>
+    </figure>
+  );
+}
+
+function AttemptPass() {
+  const funnel = [
+    { label: "Planned Tests", sub: "כל הבדיקות המתוכננות", tone: "light" as const },
+    { label: "Attempted Tests", sub: "הבדיקות שבאמת נוסו / הורצו", tone: "blue" as const },
+    { label: "Passed Tests", sub: "הבדיקות שעברו בהצלחה", tone: "dark" as const },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מהמתוכנן, למה שנוסה, למה שעבר
+      </figcaption>
+      {funnel.map((f, i) => (
+        <div key={f.label}>
+          <Box label={f.label} sub={f.sub} tone={f.tone} className="py-2.5" />
+          {i < funnel.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        לא כל מה שמתוכנן בהכרח נוסה, ולא כל מה שנוסה בהכרח עובר — לכן Attempt ו-Pass הם שני מספרים שונים.
+      </p>
+    </figure>
+  );
+}
+
+function StageMaturity() {
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        בגרות השלב — אותה תוצאה, משמעות שונה
+      </figcaption>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="rounded-lg border border-line bg-bg p-3 text-center">
+          <div className="font-mono text-[11.5px] font-bold text-ink" dir="ltr">
+            Early Stage
+          </div>
+          <div className="mt-0.5 text-[11px] font-semibold text-ink-soft">שלב מוקדם</div>
+          <p className="mt-2 text-[11px] leading-relaxed text-ink-soft">
+            יותר כשלים · פחות כיסוי — וזה מצופה
+          </p>
+        </div>
+        <div className="rounded-lg border border-blue/40 bg-blue-tint p-3 text-center">
+          <div className="font-mono text-[11.5px] font-bold text-blue-deep" dir="ltr">
+            Late Stage
+          </div>
+          <div className="mt-0.5 text-[11px] font-semibold text-blue-deep">שלב מאוחר</div>
+          <p className="mt-2 text-[11px] leading-relaxed text-blue-deep/80">
+            יותר כיסוי · ציפייה גבוהה יותר ל-Pass
+          </p>
+        </div>
+      </div>
+      <div className="mt-2 flex items-center justify-center gap-2" aria-hidden="true">
+        <span className="text-[11px] text-ink-faint">כשלים</span>
+        <span className="text-[13px] text-blue/70">◀────────</span>
+        <span className="text-[11px] text-ink-faint">בגרות ← זמן</span>
+        <span className="text-[13px] text-blue/70">────────▶</span>
+        <span className="text-[11px] text-ink-faint">כיסוי</span>
+      </div>
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תמיד קוראים תוצאה יחד עם השאלה &quot;באיזה שלב אנחנו?&quot; — כשל מוקדם ומאוחר אינם אותו דבר.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
+  if (kind === "release-lifecycle") return <ReleaseLifecycle />;
+  if (kind === "attempt-pass") return <AttemptPass />;
+  if (kind === "stage-maturity") return <StageMaturity />;
   if (kind === "cpu-foundation-ladder") return <CpuFoundationLadder />;
   if (kind === "cpu-inner-map") return <CpuInnerMap />;
   if (kind === "core-module") return <CoreModule />;

@@ -43,8 +43,9 @@ export default function HomePage() {
         <h2 className="mb-3.5 text-[20px] font-bold">מסלולי למידה</h2>
         <div className="space-y-4">
           {learningPaths.map((path) => {
+            // מסלול פעיל או משולב (יש בו שיעורים פעילים) — מציגים התקדמות.
             const stats =
-              path.status === "active"
+              path.relatedStageIds.length > 0
                 ? pathLessonStats(path.relatedStageIds)
                 : undefined;
             return (
