@@ -1,9 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import type { GlossaryTerm } from "@/lib/types";
-import { categoryLabels, getTerm } from "@/lib/glossary";
+import type { GlossaryTerm, TermLevel } from "@/lib/types";
+import {
+  categoryLabels,
+  getTerm,
+  getTermCaveat,
+  getTermLevel,
+  levelLabels,
+} from "@/lib/glossary";
 import { getVisualByTerm } from "@/lib/visuals";
+
+// צבעי תווית לפי רמת לימוד — עדין, לא צועק.
+const levelChipClass: Record<TermLevel, string> = {
+  basic: "bg-good-tint text-good",
+  intermediate: "bg-blue-tint text-blue-deep",
+  advanced: "bg-surface-sunken text-ink",
+  internal: "bg-navy text-blue-tint",
+};
 
 /** כרטיס מושג עשיר: הסבר פשוט, דוגמה, איפה פוגשים בעבודה, ומונחים קשורים */
 export default function TermCard({
@@ -22,6 +36,8 @@ export default function TermCard({
     .filter((t): t is GlossaryTerm => Boolean(t));
 
   const visual = getVisualByTerm(term.id);
+  const level = getTermLevel(term);
+  const caveat = getTermCaveat(term);
 
   return (
     <div
@@ -37,6 +53,11 @@ export default function TermCard({
             </span>
             <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-[10.5px] font-semibold text-ink-faint">
               {categoryLabels[term.category]}
+            </span>
+            <span
+              className={`rounded-full px-2 py-0.5 text-[10.5px] font-semibold ${levelChipClass[level]}`}
+            >
+              {levelLabels[level]}
             </span>
           </div>
           <div className="mt-0.5 text-[15.5px] font-bold text-ink">{term.he}</div>
@@ -58,6 +79,16 @@ export default function TermCard({
       <p className="mt-2 text-[14.5px] leading-relaxed text-ink-soft">
         {term.explanation}
       </p>
+
+      {caveat && (
+        <div className="mt-2.5 flex gap-2 rounded-xl border-s-[3px] border-bad/50 bg-bad-tint/40 p-2.5">
+          <span className="mt-0.5 shrink-0 text-[13px]" aria-hidden="true">⚠️</span>
+          <p className="text-[13px] leading-relaxed text-ink-soft">
+            <span className="font-semibold text-bad">שים לב: </span>
+            {caveat}
+          </p>
+        </div>
+      )}
 
       {visual && (
         <figure className="mt-3 overflow-hidden rounded-xl border border-line bg-surface-sunken">

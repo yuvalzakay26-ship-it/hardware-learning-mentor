@@ -1,4 +1,4 @@
-import type { GlossaryTerm, TermCategory } from "./types";
+import type { GlossaryTerm, TermCategory, TermLevel } from "./types";
 
 /**
  * אזור המושגים — כל מונח מוסבר בעברית פשוטה, עם דוגמה מהחומרה האמיתית,
@@ -27,6 +27,118 @@ export const categoryOrder: TermCategory[] = [
   "debug",
   "validation",
 ];
+
+// ── היררכיית מושגים: רמת לימוד ואימות צוות ──────────────────────────────────
+//
+// כל מושג מקבל "רמת לימוד" שעוזרת ללומד לדעת מה בסיסי, מה מתקדם, ומה פנימי
+// שדורש אימות מול הצוות. הרמה נקבעת כך: קודם term.level אם הוגדר במפורש על
+// המושג, אחרת לפי המפות כאן, אחרת ברירת מחדל "basic".
+
+export const levelLabels: Record<TermLevel, string> = {
+  basic: "בסיסי",
+  intermediate: "ביניים",
+  advanced: "מתקדם",
+  internal: "פנימי · דורש אימות צוות",
+};
+
+export const levelOrder: TermLevel[] = ["basic", "intermediate", "advanced", "internal"];
+
+// המשמעות של מונחים אלה נשענת על התיעוד/הנהלים הפנימיים של הצוות.
+const INTERNAL_TERMS = new Set<string>([
+  "osbv",
+  "svos",
+  "ttk",
+  "ttk3",
+  "tcss",
+  "dci",
+  "xdp",
+  "ixdp",
+]);
+
+// מונחים מתקדמים — לרוב Debug עמוק וחשמל/תרמי מתקדם.
+const ADVANCED_TERMS = new Set<string>([
+  "debug-connection",
+  "debug-probe",
+  "trace",
+  "platform-state",
+  "firmware-debug",
+  "alt-mode",
+  "controller",
+  "power-delivery",
+  "power-path",
+  "power-distribution",
+  "throttling",
+  "thermal-limit",
+  "peak-temperature",
+  "ref-designator",
+]);
+
+// מונחי ביניים — ארכיטקטורה, ולידציה ובניית סביבה שנשענים על הבסיס.
+const INTERMEDIATE_TERMS = new Set<string>([
+  "pch",
+  "chipset",
+  "dmi",
+  "pcie",
+  "validation",
+  "p2p",
+  "protocol",
+  "device-detection",
+  "dock",
+  "display-output",
+  "known-good",
+  "known-good-device",
+  "known-good-setup",
+  "reproduce",
+  "evidence",
+  "documentation",
+  "board-documentation",
+  "permission",
+  "security",
+  "validation-environment",
+  "test-environment",
+  "environment-build",
+  "image",
+  "boot-menu",
+  "logs-path",
+  "test-script",
+  "test-report",
+  "configuration",
+  "version",
+  "tool-version",
+  "toolkit",
+  "test-tool",
+  "lab-tool",
+  "debug-evidence",
+  "team-documentation",
+  "power-source",
+  "test-setup",
+  "lab-safety",
+  "observed-behavior",
+  "workload",
+  "stability",
+  "thermal-log",
+  "hexadecimal",
+]);
+
+// הערת האימות שמוצגת על מונחים פנימיים.
+export const TEAM_CAVEAT =
+  "המשמעות המדויקת דורשת אימות מול הצוות / התיעוד הפנימי.";
+
+/** רמת הלימוד של מושג — override מפורש, ואז מפות, ואז ברירת מחדל בסיסי. */
+export function getTermLevel(term: GlossaryTerm): TermLevel {
+  if (term.level) return term.level;
+  if (INTERNAL_TERMS.has(term.id)) return "internal";
+  if (ADVANCED_TERMS.has(term.id)) return "advanced";
+  if (INTERMEDIATE_TERMS.has(term.id)) return "intermediate";
+  return "basic";
+}
+
+/** הערת אימות צוות למונח, אם רלוונטית. */
+export function getTermCaveat(term: GlossaryTerm): string | undefined {
+  if (term.caveat) return term.caveat;
+  if (INTERNAL_TERMS.has(term.id)) return TEAM_CAVEAT;
+  return undefined;
+}
 
 export const glossaryTerms: GlossaryTerm[] = [
   {

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import LessonCard from "@/components/LessonCard";
+import LessonIntroMeta from "@/components/LessonIntroMeta";
 import PersonalNote from "@/components/PersonalNote";
 import type { Confidence, Module, UnclearReason } from "@/lib/types";
 import { UNCLEAR_REASONS } from "@/lib/notes";
@@ -204,6 +205,8 @@ export default function LessonView({ module }: { module: Module }) {
 
       {/* כרטיס הלימוד הנוכחי */}
       <div className="mt-4" key={section.id}>
+        {/* הקשר השיעור במסלול — רק בכרטיס הראשון, כדי לא להעמיס */}
+        {index === 0 && <LessonIntroMeta module={module} />}
         <LessonCard section={section} />
 
         {/* תחושת ביטחון — לא מבחן, רק סימון אישי */}

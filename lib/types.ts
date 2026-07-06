@@ -58,6 +58,14 @@ export type TermCategory =
   | "debug" // חיבורי Debug ושליטה מרחוק
   | "validation"; // ולידציה
 
+// רמת לימוד של מושג במילון — עוזרת ללומד לדעת מה בסיסי ומה מתקדם, ומה דורש
+// אימות מול הצוות לפני שמסתמכים עליו.
+export type TermLevel =
+  | "basic" // בסיסי
+  | "intermediate" // ביניים
+  | "advanced" // מתקדם
+  | "internal"; // פנימי / דורש אימות צוות
+
 export interface GlossaryTerm {
   id: string;
   en: string;
@@ -67,6 +75,11 @@ export interface GlossaryTerm {
   example?: string; // דוגמה מהחומרה האמיתית
   workplace?: string; // "איפה פוגשים את זה בעבודה?"
   related?: string[]; // מזהי מונחים קשורים
+  // רמת לימוד. אם לא הוגדרה — נחשבת "basic" בברירת מחדל (ראה getTermLevel).
+  level?: TermLevel;
+  // הערת אזהרה למונחים פנימיים/לא ודאיים: "המשמעות המדויקת דורשת אימות מול
+  // הצוות / התיעוד הפנימי". מוצגת בכרטיס המושג כשקיימת.
+  caveat?: string;
 }
 
 // רמת ביטחון של הלומד בכרטיס לימוד — ללא ציון, רק תחושה אישית
