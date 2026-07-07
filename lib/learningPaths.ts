@@ -73,9 +73,11 @@ export const learningPaths: LearningPath[] = [
     titleHebrew: "יסודות חומרה",
     chip: "Hardware",
     descriptionHebrew:
-      "הבסיס הטכני להבנת המעבד, רכיבי המערכת, BIOS, POST, Debug, חיבורים ותרמי.",
+      "הבסיס הטכני להבנת המעבד, רכיבי המערכת, ארכיטקטורת הפלטפורמה, BIOS, POST, Debug, חיבורים ותרמי.",
     emoji: "🧩",
-    status: "active",
+    // מסלול משולב: יש בו שיעורים פעילים רבים, ולצידם שיעור עתידי מתוכנן אחד
+    // (Firmware ו-Boot Internals) שעדיין אינו פעיל.
+    status: "mixed",
     // כל השלבים הפעילים — כדי שאף שיעור קיים לא יישאר מחוץ למסלול.
     relatedStageIds: [
       "foundation",
@@ -86,7 +88,15 @@ export const learningPaths: LearningPath[] = [
       "advanced-debug",
       "environments-thermal",
     ],
-    plannedSessions: [],
+    plannedSessions: [
+      {
+        id: "hw-firmware-boot-internals",
+        titleEnglish:
+          "Firmware & Boot Internals — ROM, Flash, Microcode, MRC, Fuses and Straps",
+        hebrewNote:
+          "שיעור עתידי מתוכנן: פנימיות הקושחה והעלייה — ROM, Flash, Microcode/uCode, MRC, Fuses ו-Straps. נלמד רק אחרי שבסיס הפלטפורמה מוטמע. עדיין אינו שיעור פעיל.",
+      },
+    ],
     plannedTerms: [],
   },
   {

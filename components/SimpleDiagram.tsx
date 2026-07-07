@@ -799,7 +799,108 @@ function StageMaturity() {
   );
 }
 
+function PlatformOverview() {
+  const steps: { label: string; sub: string; tone: "light" | "dark" | "blue" }[] = [
+    { label: "CPU Package", sub: "המעבד באריזתו — הליבות, ה-Uncore ובקר הזיכרון", tone: "dark" },
+    { label: "Memory Controller", sub: "בקר זיכרון — מנהל את התקשורת מול ה-RAM", tone: "blue" },
+    { label: "RAM", sub: "הזיכרון הראשי — נתוני העבודה של המערכת", tone: "light" },
+    { label: "DMI", sub: "Direct Media Interface — הקו בין המעבד ל-PCH", tone: "dark" },
+    { label: "PCH", sub: "Platform Controller Hub — צומת התקשורת של הפלטפורמה", tone: "blue" },
+    { label: "PCIe Devices", sub: "התקנים מהירים — SSD מסוג NVMe, כרטיס מסך, רשת", tone: "light" },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        מבט־על על הפלטפורמה — מהמעבד ועד להתקני ה-PCIe
+      </figcaption>
+      {steps.map((step, i) => (
+        <div key={i}>
+          <Box label={step.label} sub={step.sub} tone={step.tone} className="py-2.5" />
+          {i < steps.length - 1 && <Wire />}
+        </div>
+      ))}
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תרשים מושגי בלבד — לא תרשים פלטפורמה אמיתי. הניתוב המדויק (אילו נתיבים מגיעים
+        מהמעבד ואילו מה-PCH) משתנה לפי הלוח והתיעוד, ודורש אימות מול הצוות.
+      </p>
+    </figure>
+  );
+}
+
+function PhysicalLayers() {
+  const layers = [
+    { label: "Silicon / Die", sub: "השבב עצמו — הסיליקון שעליו בנויים הטרנזיסטורים", tone: "dark" as const },
+    { label: "Package", sub: "האריזה שעוטפת את הסיליקון ומחברת אותו החוצה", tone: "blue" as const },
+    { label: "PCB / Board", sub: "הלוח המודפס שעליו יושבת האריזה ושאר הרכיבים", tone: "light" as const },
+    { label: "Connectors / Devices", sub: "מחברים והתקנים שמתחברים ללוח", tone: "blue" as const },
+  ];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        שכבות פיזיות — מהסיליקון ועד המחברים על הלוח
+      </figcaption>
+      <div className="flex flex-col gap-1">
+        {layers.map((l, i) => (
+          <div key={l.label}>
+            <Box label={l.label} sub={l.sub} tone={l.tone} className="py-2.5" />
+            {i < layers.length - 1 && (
+              <div className="flex justify-center" aria-hidden="true">
+                <span className="text-[13px] leading-none text-blue/70">▼</span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        כל שכבה יושבת על זו שמתחתיה: הסיליקון בתוך האריזה, האריזה על הלוח (PCB),
+        והמחברים על הלוח. תרשים מושגי בלבד.
+      </p>
+    </figure>
+  );
+}
+
+function DebugLayerThinking() {
+  const layers = ["CPU", "Memory", "PCH", "PCIe", "Board / PCB", "Firmware", "Setup"];
+  return (
+    <figure className="rounded-2xl border border-line bg-surface p-4">
+      <figcaption className="mb-3 text-center text-[12px] font-semibold text-ink-soft">
+        חשיבת Debug — באיזו שכבה נמצא הכשל?
+      </figcaption>
+
+      <Box
+        label="סימפטום של תקלה"
+        sub="Failure Symptom — משהו לא עובד כמצופה"
+        tone="dark"
+        className="py-2.5"
+      />
+
+      <Wire label="באיזו שכבה?" />
+
+      <Box
+        label="איזו שכבה אחראית?"
+        sub="Which layer? — במקום לנחש, שואלים שאלה ממוקדת"
+        tone="blue"
+        className="py-2.5"
+      />
+
+      <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+        {layers.map((l) => (
+          <Box key={l} label={l} />
+        ))}
+      </div>
+
+      <p className="mt-3 text-center text-[11px] leading-relaxed text-ink-faint">
+        תרשים מושגי בלבד. אוצר המילים של הארכיטקטורה עוזר לתאר את התקלה במדויק — לא
+        לפתור סיליקון, אלא לומר באיזו שכבה כנראה הבעיה.
+      </p>
+    </figure>
+  );
+}
+
 export default function SimpleDiagram({ kind }: { kind: DiagramKind }) {
+  if (kind === "platform-overview") return <PlatformOverview />;
+  if (kind === "physical-layers") return <PhysicalLayers />;
+  if (kind === "debug-layer-thinking") return <DebugLayerThinking />;
   if (kind === "release-lifecycle") return <ReleaseLifecycle />;
   if (kind === "attempt-pass") return <AttemptPass />;
   if (kind === "stage-maturity") return <StageMaturity />;

@@ -21,7 +21,10 @@ export type DiagramKind =
   | "debug-connector"
   | "release-lifecycle"
   | "attempt-pass"
-  | "stage-maturity";
+  | "stage-maturity"
+  | "platform-overview"
+  | "physical-layers"
+  | "debug-layer-thinking";
 
 export type Block =
   | { type: "p"; text: string }
